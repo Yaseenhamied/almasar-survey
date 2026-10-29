@@ -1,0 +1,251 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<title>Survey Results | Al-Masar</title>
+<link rel="icon" href="assets/symbol.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Beiruti:wght@400;600;700;800&family=Nunito:wght@400;600;700;800&display=swap">
+<style>
+/* Consultant-only results board: navy bar, white cards, gold = majority / emphasis, semantic red/amber for flags. */
+:root{--navy:#172A77;--gold:#EAA918;--gold-soft:#FBF1D9;--bg:#F4F6FB;--surface:#fff;--ink:#141B3D;--muted:#5A628A;--line:#DCE0EE;--chip:#EEF1F9;
+  --good:#1F7A4D;--good-bg:#E6F4EC;--warn:#9A6100;--warn-bg:#FFF4DB;--bad:#B42318;--bad-bg:#FDECEA;
+  --font:"Nunito","Beiruti",system-ui,"Segoe UI",sans-serif;color-scheme:light}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--font);font-size:15px;line-height:1.55}
+.ar{font-family:"Beiruti","Nunito",sans-serif;font-size:1.08em}
+.bar{background:var(--navy);color:#fff}
+.bar-in{max-width:1240px;margin:0 auto;padding:14px 16px;display:flex;gap:16px;align-items:center;justify-content:space-between;flex-wrap:wrap}
+.bar img{height:40px}
+.bar h1{font-size:19px;margin:0;font-weight:800}
+.bar .sub{font-size:13px;color:#C9CFEA}
+.bar .acts{display:flex;gap:8px;flex-wrap:wrap}
+.btn{font:inherit;font-weight:700;font-size:14px;border-radius:9px;padding:8px 14px;cursor:pointer;border:1px solid var(--line);background:#fff;color:var(--navy)}
+.btn.p{background:var(--navy);color:#fff;border-color:var(--navy)}
+.btn.g{background:var(--gold);border-color:var(--gold);color:var(--navy)}
+.bar .btn{background:transparent;color:#fff;border-color:rgba(255,255,255,.35)}
+.bar .btn.on{background:var(--gold);color:var(--navy);border-color:var(--gold)}
+.btn:focus-visible,input:focus,select:focus{outline:3px solid var(--gold);outline-offset:2px}
+main{max-width:1240px;margin:0 auto;padding:20px 16px 60px;display:grid;gap:18px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:18px 20px;min-width:0}
+.card h2{margin:0 0 12px;font-size:17px;color:var(--navy)}
+.demo{background:var(--warn-bg);color:var(--warn);border:1px solid #F1D08A;border-radius:10px;padding:10px 14px;font-weight:700}
+.tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px}
+.tile{background:#fff;border:1px solid var(--line);border-radius:12px;padding:14px 16px}
+.tile .k{font-size:12px;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);font-weight:700}
+.tile .v{font-size:28px;font-weight:800;color:var(--navy);font-variant-numeric:tabular-nums;line-height:1.2;margin-top:4px}
+.tabs{display:flex;gap:8px;flex-wrap:wrap}
+.tabs .btn[aria-selected="true"]{background:var(--navy);color:#fff;border-color:var(--navy)}
+.find{display:grid;gap:8px}
+.f{display:flex;gap:10px;align-items:flex-start;padding:10px 12px;border-radius:10px;border:1px solid var(--line)}
+.f .tag{font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.05em;border-radius:99px;padding:2px 9px;flex:none;margin-top:2px}
+.f.good{background:var(--good-bg);border-color:#BFE3CE}.f.good .tag{background:var(--good);color:#fff}
+.f.warn{background:var(--warn-bg);border-color:#F1D08A}.f.warn .tag{background:var(--warn);color:#fff}
+.f.bad{background:var(--bad-bg);border-color:#F4C2BC}.f.bad .tag{background:var(--bad);color:#fff}
+.f.info{background:var(--chip)}.f.info .tag{background:var(--navy);color:#fff}
+.sec-t{font-size:13px;font-weight:800;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin:10px 0 -4px}
+.qgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(360px,1fr));gap:14px}
+.qc h3{margin:0 0 4px;font-size:14.5px;line-height:1.4}
+.qc .qid{color:var(--gold);font-weight:800;margin-inline-end:6px}
+.qc .meta{font-size:12px;color:var(--muted);margin-bottom:10px;display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.agree{display:inline-flex;align-items:center;gap:6px;font-weight:700}
+.agree i{display:inline-block;width:70px;height:7px;border-radius:9px;background:var(--line);overflow:hidden;position:relative}
+.agree i b{position:absolute;inset:0 auto 0 0;background:var(--navy)}
+.row{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr) 26px;gap:10px;align-items:center;padding:5px 0}
+.row .lbl{font-size:13.5px;line-height:1.35}
+.row .track{height:14px;background:var(--chip);border-radius:7px;overflow:hidden}
+.row .fill{height:100%;background:#7F8CC4;border-radius:7px}
+.row.top .fill{background:var(--gold)}
+.row .n{font-weight:800;text-align:end;font-variant-numeric:tabular-nums;color:var(--navy)}
+.row .who{grid-column:1/-1;font-size:11.5px;color:var(--muted);margin-top:-3px}
+.texts{display:grid;gap:8px}
+.tx{border-inline-start:3px solid var(--gold);padding:4px 12px}
+.tx .by{font-size:12px;color:var(--muted);font-weight:700}
+.tx .t{white-space:pre-wrap}
+.empty{color:var(--muted);font-style:italic}
+.person-pick{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+select,input[type=text],input[type=password]{font:inherit;padding:8px 10px;border:1px solid var(--line);border-radius:9px;background:#fff;color:var(--ink);min-width:0}
+.ans{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.2fr);gap:4px 18px;padding:9px 0;border-bottom:1px solid var(--line)}
+.ans .q{color:var(--muted);font-size:13.5px}.ans .a{font-weight:700}
+.ans .a.none{color:#9AA3C7;font-weight:400;font-style:italic}
+.conn{max-width:560px;margin:30px auto;display:grid;gap:12px}
+.conn label{font-weight:700;font-size:13px}
+.err{color:var(--bad);font-weight:700}
+@media (max-width:720px){.qgrid{grid-template-columns:1fr}.ans{grid-template-columns:1fr}}
+@media print{.bar .acts,.tabs,.no-print{display:none!important}body{background:#fff}.card{break-inside:avoid}}
+</style>
+</head>
+<body>
+<header class="bar"><div class="bar-in">
+  <div style="display:flex;gap:14px;align-items:center"><img src="assets/horiz_white.png" alt="Al-Masar"><div><h1>Management discovery · Results</h1><div class="sub">Consultant view · private</div></div></div>
+  <div class="acts">
+    <button class="btn" type="button" id="langBtn">Show answers in Arabic</button>
+    <button class="btn" type="button" id="refresh">Refresh</button>
+    <button class="btn" type="button" id="csv">Download CSV</button>
+    <button class="btn" type="button" id="json">Download JSON</button>
+    <button class="btn" type="button" id="prt">Print</button>
+  </div>
+</div></header>
+<main id="main"></main>
+
+<script src="questions.js"></script>
+<script src="config.js"></script>
+<script>
+(function(){
+const SV=window.SURVEY,CFG=window.SURVEY_CONFIG||{};
+const LS="almasar-dashboard-conn";
+const ALLQ=[];SV.sections.forEach(s=>s.q.forEach(q=>{q.sec=s;ALLQ.push(q)}));
+const QI=Object.fromEntries(ALLQ.map(q=>[q.id,q]));
+let conn={};try{conn=JSON.parse(localStorage.getItem(LS)||"{}")||{}}catch(e){}
+const hp=new URLSearchParams(location.hash.slice(1));
+if(hp.get("key")){conn.key=hp.get("key");try{localStorage.setItem(LS,JSON.stringify(conn))}catch(e){};history.replaceState(null,"",location.pathname+location.search)}
+const demo=new URLSearchParams(location.search).get("demo")==="1";
+let R=[],L=0,view="all",person=null,err="";
+const $=(s,r=document)=>r.querySelector(s);
+const esc=s=>String(s==null?"":s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const txt=a=>`<span class="${L?"ar":""}">${esc(a[L])}</span>`;
+const endpoint=()=>conn.endpoint||CFG.endpoint||"";
+
+const DEMO=[
+ {id:"d1",name:"Demo owner A",role:"Chairman",lang:"ar",receivedAt:"2026-11-02T10:12:00Z",answers:{A1:1,A2:0,A3:0,A4:[0,1],B1:[1,3,2],B2:1,B3:2,B4:[0,1],B5:"أن نكون ضمن أول 10 شركات في طرابلس",C1:1,C2:"أحمد – مدير المبيعات",C3:1,C4:[0,2],C5:0,C6:0,D1:[0,2],D2:2,D3:"سرعة الإصدار والتعامل المحترم",D4:"العالمية، لأن حضورها قوي",D5:[0,2],D5_c:"",D6:"3 مكاتب و8 موظفين",E1:"أن ندفع دون أن نرى نتائج واضحة",E2:""}},
+ {id:"d2",name:"Demo owner B",role:"Board member",lang:"ar",receivedAt:"2026-11-02T12:40:00Z",answers:{A1:0,A2:2,A3:2,A4:[0,2],B1:[0,1],B2:0,B3:2,B4:[4],B5:"زيادة المبيعات",C1:0,C2:"",C3:2,C4:[2],C5:0,C6:2,D1:[0,1],D2:1,D3:"",D4:"البركة",D5:[0],D5_c:"",D6:"",E1:"التكلفة",E2:"نريد أن نبدأ بالمركبات"}},
+ {id:"d3",name:"Demo owner C",role:"General Manager",lang:"ar",receivedAt:"2026-11-03T09:05:00Z",answers:{A1:1,A2:0,A3:0,A4:[1,2],B1:[1,2,5],B2:2,B3:2,B4:[0,1,2],B5:"عملاء مؤسسيون أكثر وثقة أكبر في السوق",C1:1,C2:"سارة – العلاقات العامة",C3:1,C4:[0,1],C5:1,C6:0,D1:[2,0],D2:0,D3:"خدمة سريعة ومتابعة شخصية",D4:"المتحدة بسبب علاقاتها مع الشركات",D5:[0,1,3],D5_c:"تسوية خلال 15 يوم عمل للمركبات",D6:"3 مكاتب، 9 مندوبين",E1:"ألا يفهم الفريق طبيعة سوق التأمين",E2:""}}
+];
+
+function ansText(q,a,lang){const v=a[q.id];let s="";
+  if(q.type==="single")s=v!=null&&q.o[v]?q.o[v][lang]:"";
+  else if(q.type==="multi")s=Array.isArray(v)?v.map(i=>q.o[i]&&q.o[i][lang]).filter(Boolean).join(" · "):"";
+  else s=v||"";
+  if(q.comment&&a[q.id+"_c"])s+=(s?" — ":"")+a[q.id+"_c"];
+  return s}
+const has=(q,a)=>{const v=a[q.id];return q.type==="single"?v!=null:q.type==="multi"?Array.isArray(v)&&v.length>0:!!(v&&String(v).trim())};
+const first=n=>String(n||"?").trim();
+
+async function load(){
+  err="";
+  if(demo){R=DEMO;render();return}
+  if(!endpoint()||!conn.key){R=null;render();return}
+  $("#main").innerHTML=`<div class="card">Loading answers…</div>`;
+  try{
+    const r=await fetch(endpoint()+(endpoint().includes("?")?"&":"?")+"key="+encodeURIComponent(conn.key)+"&t="+Date.now());
+    const j=await r.json();
+    if(!j.ok||!Array.isArray(j.responses)){R=null;err="The key was not accepted. Check the key in the 'Dashboard key' tab of your Google Sheet.";render();return}
+    R=j.responses.map(x=>({...x,answers:x.answers||{}})).sort((a,b)=>String(a.receivedAt).localeCompare(String(b.receivedAt)));
+    // keep only the latest submission per name
+    const byName={};R.forEach(x=>byName[(x.name||"").trim().toLowerCase()]=x);R=Object.values(byName);
+  }catch(e){R=null;err="Could not reach the answer store. Check the Web app URL and that it is deployed with access set to Anyone."}
+  render();
+}
+
+function connectView(){
+  return `<div class="card conn"><h2>Connect to the answer store</h2>
+  <p style="margin:0;color:var(--muted)">Paste the Web app URL from Google Apps Script and the private key from the "Dashboard key" tab of your Google Sheet. They are saved only on this device.</p>
+  <div><label for="ep">Web app URL</label><input type="text" id="ep" style="width:100%" value="${esc(endpoint())}" placeholder="https://script.google.com/macros/s/…/exec"></div>
+  <div><label for="ky">Dashboard key</label><input type="password" id="ky" style="width:100%" value="${esc(conn.key||"")}"></div>
+  ${err?`<div class="err">${esc(err)}</div>`:""}
+  <div style="display:flex;gap:10px;flex-wrap:wrap"><button class="btn p" id="go" type="button">Connect</button><a class="btn" href="?demo=1">Preview with demo data</a></div></div>`;
+}
+
+function dist(q,rows){const c=q.o.map(()=>[]);rows.forEach(r=>{const v=r.answers[q.id];if(q.type==="single"&&v!=null&&c[v])c[v].push(r);if(q.type==="multi"&&Array.isArray(v))v.forEach(i=>c[i]&&c[i].push(r))});return c}
+function agreement(q,rows){const ans=rows.filter(r=>has(q,r.answers));if(ans.length<2)return null;
+  if(q.type==="single"){const c=dist(q,ans);return Math.max(...c.map(x=>x.length))/ans.length}
+  // multi: average pairwise overlap (Jaccard)
+  let s=0,n=0;for(let i=0;i<ans.length;i++)for(let j=i+1;j<ans.length;j++){const a=new Set(ans[i].answers[q.id]),b=new Set(ans[j].answers[q.id]);const inter=[...a].filter(x=>b.has(x)).length;const uni=new Set([...a,...b]).size;s+=uni?inter/uni:1;n++}
+  return n?s/n:null}
+
+function findings(rows){
+  const F=[],N=rows.length,pick=(id)=>rows.filter(r=>has(QI[id],r.answers));
+  const names=arr=>arr.map(r=>esc(first(r.name))).join(", ");
+  const by=(id,i)=>rows.filter(r=>{const v=r.answers[id];return Array.isArray(v)?v.includes(i):v===i});
+  // Budget
+  const a1=pick("A1");if(a1.length){const c=dist(QI.A1,a1);const top=c.map((x,i)=>[x.length,i]).sort((a,b)=>b[0]-a[0])[0];
+    const low=by("A1",0),dep=by("A1",4),high=[...by("A1",2),...by("A1",3)];
+    F.push(["info","Budget",`Most common range: <b>${esc(QI.A1.o[top[1]][0])}</b> (${top[0]} of ${a1.length}).${high.length?` Open to more than 500k: ${names(high)}.`:""}${dep.length?` Waiting for our proposal: ${names(dep)}.`:""}`]);
+    if(low.length&&high.length)F.push(["warn","Budget gap",`Budget views are far apart: ${names(low)} chose 300–400k while ${names(high)} chose above 500k. Present two scenarios.`]);}
+  // Fees
+  const a2=pick("A2");if(a2.length){const c=dist(QI.A2,a2);const t=c.map((x,i)=>[x.length,i]).sort((a,b)=>b[0]-a[0])[0];F.push(["info","Fee payment",`Preferred: <b>${esc(QI.A2.o[t[1]][0])}</b> (${t[0]} of ${a2.length}).`])}
+  // Commitment
+  const a3=pick("A3");if(a3.length){const yes=[...by("A3",0),...by("A3",1)],disc=by("A3",2);
+    F.push([disc.length?"warn":"good","6-month commitment",disc.length?`${names(disc)} want to discuss the 6-month commitment. Prepare the case for it.`:`All who answered accept the commitment${by("A3",1).length?`; ${names(by("A3",1))} would commit to 12 months`:""}.`])}
+  // Timing expectation
+  const fast=[...by("B2",0),...by("B2",1)];if(fast.length){const one=by("B2",0);
+    F.push([one.length?"bad":"warn","Results expectation",`${names(fast)} expect clear results within ${one.length?"1 month":"3 months"}. The plan starts campaigns in months 4–6, so agree on early indicators (inquiries, leads) for months 1–3.`])}
+  // Tracking
+  const none=by("B4",4);if(none.length)F.push(["bad","No baseline",`${names(none)} said nothing is tracked today. Set up basic tracking (policies, inquiries, source) in month 1, or results cannot be proven.`]);
+  // Involvement & approvals
+  const micro=by("C1",0),slow=by("C3",2);if(micro.length)F.push(["warn","Approvals",`${names(micro)} want to approve every post and ad${slow.length?`, and ${names(slow)} expect approvals to take up to a week`:""}. Propose a monthly content calendar approved in one sitting.`]);
+  // Capability
+  const noStaff=by("C5",0),noHire=by("C6",1);if(noStaff.length)F.push([noHire.length?"warn":"info","In-house team",`No marketing staff today (${names(noStaff)}).${noHire.length?` ${names(noHire)} do not plan to hire, so training and handover need to be lighter.`:" Hiring support is a selling point."}`]);
+  // Products & focus
+  const d1=pick("D1");if(d1.length){const c=dist(QI.D1,d1).map((x,i)=>[x.length,i]).sort((a,b)=>b[0]-a[0]).filter(x=>x[0]>0).slice(0,2);F.push(["info","Products first",c.map(x=>`<b>${esc(QI.D1.o[x[1]][0])}</b> (${x[0]})`).join(" and ")])}
+  const d2=pick("D2");if(d2.length){const c=dist(QI.D2,d2);const t=c.map((x,i)=>[x.length,i]).sort((a,b)=>b[0]-a[0])[0];F.push([agreement(QI.D2,rows)===1?"good":"warn","Main focus",`<b>${esc(QI.D2.o[t[1]][0])}</b> (${t[0]} of ${d2.length})${agreement(QI.D2,rows)===1?", all agree.":"; owners are split."}`])}
+  // Proof points
+  const d5=pick("D5");if(d5.length){const ok=dist(QI.D5,d5).map((x,i)=>[x,i]).filter(x=>x[0].length===d5.length&&x[1]!==5).map(x=>QI.D5.o[x[1]][0]);
+    F.push([ok.length?"good":"warn","Public proof points",ok.length?`Everyone agreed we can announce: <b>${ok.map(esc).join(", ")}</b>.`:"No proof point is approved by everyone yet. Confirm before any campaign uses one."])}
+  // Disagreements
+  const split=ALLQ.filter(q=>q.type==="single").map(q=>[q,agreement(q,rows)]).filter(x=>x[1]!=null&&x[1]<.6);
+  if(split.length)F.push(["warn","Where owners disagree",split.map(x=>`${x[0].id} ${esc(x[0].label)}`).join(" · ")+". Settle these in the next meeting."]);
+  // Concerns
+  const e1=pick("E1");if(e1.length)F.push(["info","Main concerns",e1.map(r=>`<b>${esc(first(r.name))}:</b> <span class="ar">${esc(r.answers.E1)}</span>`).join("<br>")]);
+  return F;
+}
+
+function qCard(q,rows){
+  const ans=rows.filter(r=>has(q,r.answers));let body="",meta=`${ans.length} of ${rows.length} answered`;
+  if(q.o){const c=dist(q,ans);const mx=Math.max(1,...c.map(x=>x.length));const top=Math.max(...c.map(x=>x.length));
+    body=c.map((x,i)=>`<div class="row ${x.length&&x.length===top?"top":""}"><div class="lbl">${txt(q.o[i])}</div><div class="track"><div class="fill" style="width:${x.length/mx*100}%"></div></div><div class="n">${x.length}</div>${x.length?`<div class="who">${x.map(r=>esc(first(r.name))).join(", ")}</div>`:""}</div>`).join("");
+    const ag=agreement(q,rows);if(ag!=null)meta+=` <span class="agree" title="How much the answers agree">Agreement <i><b style="width:${Math.round(ag*100)}%"></b></i> ${Math.round(ag*100)}%</span>`;
+    if(q.comment){const cm=rows.filter(r=>r.answers[q.id+"_c"]);if(cm.length)body+=`<div class="texts" style="margin-top:8px">`+cm.map(r=>`<div class="tx"><div class="by">${esc(r.name)}</div><div class="t ar">${esc(r.answers[q.id+"_c"])}</div></div>`).join("")+`</div>`}
+  }else{body=ans.length?`<div class="texts">`+ans.map(r=>`<div class="tx"><div class="by">${esc(r.name)}${r.role?" · "+esc(r.role):""}</div><div class="t ar">${esc(r.answers[q.id])}</div></div>`).join("")+`</div>`:`<div class="empty">No answers yet</div>`}
+  return `<div class="card qc"><h3><span class="qid">${q.id}</span>${txt(q.t)}</h3><div class="meta">${meta}</div>${body}</div>`;
+}
+
+function personView(rows){
+  if(!person||!rows.find(r=>r.id===person))person=rows[0]&&rows[0].id;
+  const p=rows.find(r=>r.id===person);if(!p)return "";
+  const n=ALLQ.filter(q=>has(q,p.answers)).length;
+  const fl=findings([p]).filter(f=>f[0]!=="info");
+  let h=`<div class="card"><div class="person-pick"><label for="pp" style="font-weight:700">Person</label><select id="pp">${rows.map(r=>`<option value="${esc(r.id)}" ${r.id===person?"selected":""}>${esc(r.name)}${r.role?" · "+esc(r.role):""}</option>`).join("")}</select>
+   <span style="color:var(--muted)">Answered ${n} of ${ALLQ.length} · received ${esc(String(p.receivedAt||"").slice(0,16).replace("T"," "))}</span></div></div>`;
+  if(fl.length)h+=`<div class="card"><h2>Flags for ${esc(first(p.name))}</h2><div class="find">${fl.map(f=>`<div class="f ${f[0]}"><span class="tag">${esc(f[1])}</span><div>${f[2]}</div></div>`).join("")}</div></div>`;
+  SV.sections.forEach(s=>{h+=`<div class="card"><h2>${s.k}. ${txt(s.t)}</h2>`+s.q.map(q=>{const a=ansText(q,p.answers,L);return `<div class="ans"><div class="q"><b>${q.id}</b> ${txt(q.t)}</div><div class="a ${a?"":"none"} ${L||q.type==="text"||q.type==="short"?"ar":""}">${esc(a||"No answer")}</div></div>`}).join("")+`</div>`});
+  return h;
+}
+
+function render(){
+  const m=$("#main");
+  if(R===null){m.innerHTML=connectView();$("#go").onclick=()=>{conn.endpoint=$("#ep").value.trim();conn.key=$("#ky").value.trim();try{localStorage.setItem(LS,JSON.stringify(conn))}catch(e){};load()};return}
+  const rows=R;const N=rows.length;
+  let h=demo?`<div class="demo">Demo data: these three respondents are made up to preview the dashboard. Open the page without ?demo=1 to see real answers.</div>`:"";
+  const avg=N?Math.round(rows.reduce((s,r)=>s+ALLQ.filter(q=>has(q,r.answers)).length,0)/N/ALLQ.length*100):0;
+  const last=N?String(rows.map(r=>r.receivedAt).sort().pop()).slice(0,16).replace("T"," "):"—";
+  h+=`<div class="tiles"><div class="tile"><div class="k">Respondents</div><div class="v">${N}</div></div><div class="tile"><div class="k">Avg. completion</div><div class="v">${avg}%</div></div><div class="tile"><div class="k">Last answer</div><div class="v" style="font-size:18px">${esc(last)}</div></div><div class="tile"><div class="k">Questions</div><div class="v">${ALLQ.length}</div></div></div>`;
+  if(!N){m.innerHTML=h+`<div class="card empty">No answers yet. Share the survey link and refresh this page later.</div>`;return}
+  h+=`<div class="tabs no-print" role="tablist"><button class="btn" role="tab" aria-selected="${view==="all"}" data-v="all">All owners combined</button><button class="btn" role="tab" aria-selected="${view==="one"}" data-v="one">Each person</button></div>`;
+  if(view==="all"){
+    const F=findings(rows);
+    h+=`<div class="card"><h2>Key findings</h2><div class="find">${F.map(f=>`<div class="f ${f[0]}"><span class="tag">${esc(f[1])}</span><div>${f[2]}</div></div>`).join("")||'<div class="empty">Not enough answers yet.</div>'}</div></div>`;
+    SV.sections.forEach(s=>{h+=`<div class="sec-t">${s.k} · ${txt(s.t)}</div><div class="qgrid">${s.q.map(q=>qCard(q,rows)).join("")}</div>`});
+  }else h+=personView(rows);
+  m.innerHTML=h;
+  m.querySelectorAll("[data-v]").forEach(b=>b.onclick=()=>{view=b.dataset.v;render()});
+  const pp=$("#pp");if(pp)pp.onchange=()=>{person=pp.value;render()};
+}
+
+function download(name,text,type){const b=new Blob([text],{type});const a=document.createElement("a");a.href=URL.createObjectURL(b);a.download=name;document.body.appendChild(a);a.click();setTimeout(()=>{URL.revokeObjectURL(a.href);a.remove()},500)}
+$("#csv").onclick=()=>{if(!R||!R.length)return;const head=["Name","Role","Received",...ALLQ.map(q=>q.id+" "+q.label)];
+  const lines=[head,...R.map(r=>[r.name,r.role,r.receivedAt,...ALLQ.map(q=>ansText(q,r.answers,0))])].map(row=>row.map(c=>'"'+String(c==null?"":c).replace(/"/g,'""')+'"').join(","));
+  download("almasar-survey-answers.csv","﻿"+lines.join("\r\n"),"text/csv;charset=utf-8")};
+$("#json").onclick=()=>{if(!R)return;download("almasar-survey-answers.json",JSON.stringify({questions:SV,responses:R},null,2),"application/json")};
+$("#prt").onclick=()=>window.print();
+$("#refresh").onclick=load;
+$("#langBtn").onclick=()=>{L=L?0:1;$("#langBtn").textContent=L?"Show answers in English":"Show answers in Arabic";$("#langBtn").classList.toggle("on",!!L);render()};
+window.addEventListener("hashchange",()=>{if(location.hash.includes("key="))location.reload()});
+load();
+})();
+</script>
+</body>
+</html>
