@@ -5,7 +5,10 @@
  *  - doGet : the private dashboard reads all answers, only with the secret key.
  * Run setup() once before deploying (it creates the sheets and the secret key).
  */
+// The Google Sheet that stores the answers (works whether or not the script is attached to it).
+var SHEET_ID = '1UAonbuXG_2O1dwsMWjh7N1RasLf2IPYYxX2DVinXCis';
 var SHEET_NAME = 'Responses';
+function book_() { return SpreadsheetApp.openById(SHEET_ID); }
 var BASE_HEADERS = ['Received at', 'Submission ID', 'Name', 'Role', 'Language', 'Raw JSON'];
 
 function setup() {
@@ -15,7 +18,7 @@ function setup() {
     key = Utilities.getUuid().replace(/-/g, '') + Utilities.getUuid().replace(/-/g, '').slice(0, 8);
     props.setProperty('ADMIN_KEY', key);
   }
-  var ss = SpreadsheetApp.getActiveSpreadsheet();
+  var ss = book_();
   responsesSheet_(ss);
   var ks = ss.getSheetByName('Dashboard key') || ss.insertSheet('Dashboard key');
   ks.getRange('A1').setValue('Private dashboard key (do not share):');
@@ -47,7 +50,7 @@ function doPost(e) {
     lock.waitLock(20000);
     var data = JSON.parse(e.postData.contents);
     if (!data || !data.id || !data.name) return json_({ ok: false, error: 'missing fields' });
-    var ss = SpreadsheetApp.getActiveSpreadsheet();
+    var ss = book_();
     var sh = responsesSheet_(ss);
     var lastRow = sh.getLastRow();
     if (lastRow > 1) {
@@ -85,7 +88,7 @@ function doGet(e) {
   var key = PropertiesService.getScriptProperties().getProperty('ADMIN_KEY');
   var given = e && e.parameter ? e.parameter.key : '';
   if (!key || !given || given !== key) return json_({ ok: true, service: 'Al-Masar survey' });
-  var sh = SpreadsheetApp.getActiveSpreadsheet().getSheetByName(SHEET_NAME);
+  var sh = book_().getSheetByName(SHEET_NAME);
   if (!sh || sh.getLastRow() < 2) return json_({ ok: true, responses: [] });
   var vals = sh.getRange(2, 1, sh.getLastRow() - 1, 6).getValues();
   var out = [];

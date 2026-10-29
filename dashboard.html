@@ -4,92 +4,255 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="robots" content="noindex,nofollow">
-<title>Survey Results | Al-Masar</title>
+<meta name="theme-color" content="#172A77">
+<title>Owners' Answers | Al-Masar</title>
 <link rel="icon" href="assets/symbol.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Beiruti:wght@400;500;600;700;800&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Beiruti:wght@400;500;600;700;800;900&display=swap">
 <style>
-/* Consultant-only results board: navy bar, white cards, gold = majority / emphasis, semantic red/amber for flags. */
-:root{--navy:#172A77;--gold:#EAA918;--gold-soft:#FBF1D9;--bg:#F4F6FB;--surface:#fff;--ink:#141B3D;--muted:#5A628A;--line:#DCE0EE;--chip:#EEF1F9;
-  --good:#1F7A4D;--good-bg:#E6F4EC;--warn:#9A6100;--warn-bg:#FFF4DB;--bad:#B42318;--bad-bg:#FDECEA;
-  --font:"Beiruti",system-ui,"Segoe UI",Tahoma,sans-serif;color-scheme:light}
+/* Consultant-only results board. Same identity as the survey: navy stages with the link pattern,
+   gold = the path (consensus, the plan line), white grouped panels on a cool ground.
+   Built to answer the owners' three questions first: cost, time, how the work runs. */
+:root{
+  --ground:#F1F2F7;--group:#FFFFFF;--ink:#121833;--ink2:#4C5374;--ink3:#7E84A3;--sep:#E3E5EE;--soft:#F6F7FC;
+  --navy:#172A77;--navy-press:#0C1749;--sel:#EEF0F8;--gold:#EAA918;--gold-soft:#FBF1D9;--gold-ink:#7A5400;
+  --good:#1F7A4D;--good-bg:#E7F4ED;--warn:#8A5A00;--warn-bg:#FFF4DB;--bad:#B42318;--bad-bg:#FDECEA;
+  --r:18px;--r-stage:28px;
+  --font:"Beiruti",system-ui,-apple-system,"Segoe UI",Tahoma,sans-serif;
+  --ease-out:cubic-bezier(.22,1,.36,1);--ease-expo:cubic-bezier(.16,1,.3,1);--ease-io:cubic-bezier(.76,0,.24,1);
+  color-scheme:light}
 *{box-sizing:border-box}
-button,input,select,textarea{word-spacing:inherit;letter-spacing:inherit}
-body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--font);font-size:16px;line-height:1.55;word-spacing:.18em}
+[hidden]{display:none!important}
+body{margin:0;background:var(--ground);color:var(--ink);font-family:var(--font);font-size:16.5px;line-height:1.55;word-spacing:.12em;-webkit-font-smoothing:antialiased}
+button,input,select,textarea,a{font:inherit;color:inherit;word-spacing:inherit}
+:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
 .ar{font-size:1.04em}
-.bar{background:var(--navy);color:#fff}
-.bar-in{max-width:1240px;margin:0 auto;padding:14px 16px;display:flex;gap:16px;align-items:center;justify-content:space-between;flex-wrap:wrap}
-.bar img{height:40px}
-.bar h1{font-size:19px;margin:0;font-weight:800}
-.bar .sub{font-size:13px;color:#C9CFEA}
-.bar .acts{display:flex;gap:8px;flex-wrap:wrap}
-.btn{font:inherit;font-weight:700;font-size:14px;border-radius:9px;padding:8px 14px;cursor:pointer;border:1px solid var(--line);background:#fff;color:var(--navy)}
-.btn.p{background:var(--navy);color:#fff;border-color:var(--navy)}
-.btn.g{background:var(--gold);border-color:var(--gold);color:var(--navy)}
-.bar .btn{background:transparent;color:#fff;border-color:rgba(255,255,255,.35)}
-.bar .btn.on{background:var(--gold);color:var(--navy);border-color:var(--gold)}
-.btn:focus-visible,input:focus,select:focus{outline:3px solid var(--gold);outline-offset:2px}
-main{max-width:1240px;margin:0 auto;padding:20px 16px 60px;display:grid;gap:18px}
-.card{background:var(--surface);border:0;border-radius:16px;padding:18px 20px;min-width:0}
-.card h2{margin:0 0 12px;font-size:17px;color:var(--navy)}
-.demo{background:var(--warn-bg);color:var(--warn);border:1px solid #F1D08A;border-radius:10px;padding:10px 14px;font-weight:700}
-.tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px}
-.tile{background:#fff;border-radius:14px;padding:14px 16px}
-.tile .k{font-size:14px;color:var(--muted);font-weight:600}
-.tile .v{font-size:28px;font-weight:800;color:var(--navy);font-variant-numeric:tabular-nums;line-height:1.2;margin-top:4px}
-.tabs{display:flex;gap:8px;flex-wrap:wrap}
-.tabs .btn[aria-selected="true"]{background:var(--navy);color:#fff;border-color:var(--navy)}
-.find{display:grid;gap:8px}
-.f{display:flex;gap:10px;align-items:flex-start;padding:10px 12px;border-radius:10px;border:1px solid var(--line)}
-.f .tag{font-size:13px;font-weight:700;border-radius:99px;padding:2px 10px;flex:none;margin-top:1px;white-space:nowrap}
-.f.good{background:var(--good-bg);border-color:#BFE3CE}.f.good .tag{background:var(--good);color:#fff}
-.f.warn{background:var(--warn-bg);border-color:#F1D08A}.f.warn .tag{background:var(--warn);color:#fff}
-.f.bad{background:var(--bad-bg);border-color:#F4C2BC}.f.bad .tag{background:var(--bad);color:#fff}
-.f.info{background:var(--chip)}.f.info .tag{background:var(--navy);color:#fff}
-.sec-t{font-size:20px;font-weight:800;color:var(--navy);margin:14px 0 -2px}
-.qgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(360px,1fr));gap:14px}
-.qc h3{margin:0 0 4px;font-size:14.5px;line-height:1.4}
-.qc .qid{color:var(--gold);font-weight:800;margin-inline-end:6px}
-.qc .meta{font-size:12px;color:var(--muted);margin-bottom:10px;display:flex;gap:10px;flex-wrap:wrap;align-items:center}
-.agree{display:inline-flex;align-items:center;gap:6px;font-weight:700}
-.agree i{display:inline-block;width:70px;height:7px;border-radius:9px;background:var(--line);overflow:hidden;position:relative}
-.agree i b{position:absolute;inset:0 auto 0 0;background:var(--navy)}
-.row{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr) 26px;gap:10px;align-items:center;padding:5px 0}
-.row .lbl{font-size:13.5px;line-height:1.35}
-.row .track{height:14px;background:var(--chip);border-radius:7px;overflow:hidden}
-.row .fill{height:100%;background:#7F8CC4;border-radius:7px}
-.row.top .fill{background:var(--gold)}
-.row .n{font-weight:800;text-align:end;font-variant-numeric:tabular-nums;color:var(--navy)}
-.row .who{grid-column:1/-1;font-size:11.5px;color:var(--muted);margin-top:-3px}
-.texts{display:grid;gap:8px}
-.tx{border-inline-start:3px solid var(--gold);padding:4px 12px}
-.tx .by{font-size:12px;color:var(--muted);font-weight:700}
-.tx .t{white-space:pre-wrap}
-.empty{color:var(--muted);font-style:italic}
-.person-pick{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
-select,input[type=text],input[type=password]{font:inherit;padding:8px 10px;border:1px solid var(--line);border-radius:9px;background:#fff;color:var(--ink);min-width:0}
-.ans{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.2fr);gap:4px 18px;padding:9px 0;border-bottom:1px solid var(--line)}
-.ans .q{color:var(--muted);font-size:13.5px}.ans .a{font-weight:700}
-.ans .a.none{color:#9AA3C7;font-weight:400;font-style:italic}
-.conn{max-width:560px;margin:30px auto;display:grid;gap:12px}
-.conn label{font-weight:700;font-size:13px}
-.err{color:var(--bad);font-weight:700}
-@media (max-width:720px){.qgrid{grid-template-columns:1fr}.ans{grid-template-columns:1fr}}
-@media print{.bar .acts,.tabs,.no-print{display:none!important}body{background:#fff}.card{break-inside:avoid}}
+.num{font-variant-numeric:tabular-nums}
+
+/* app bar */
+.appbar{position:sticky;top:0;z-index:30;background:rgba(255,255,255,.97);box-shadow:0 1px 0 var(--sep)}
+.appbar-in{max-width:1240px;margin:0 auto;height:64px;padding-inline:20px;display:flex;align-items:center;gap:12px}
+.appbar img{height:32px;display:block}
+.appbar .ttl{font-weight:800;font-size:16px;color:var(--ink2);padding-inline-start:14px;margin-inline-start:2px;border-inline-start:1px solid var(--sep);line-height:1.2}
+.appbar .ttl small{display:block;font-weight:500;font-size:13px;color:var(--ink3)}
+.sp{flex:1}
+.seg{display:inline-flex;background:var(--ground);border-radius:11px;padding:3px}
+.seg button{border:0;background:transparent;border-radius:9px;min-height:36px;padding:0 13px;font-size:14.5px;font-weight:700;cursor:pointer;color:var(--ink2);transition:background .18s ease,color .18s ease}
+.seg button[aria-pressed="true"]{background:var(--group);color:var(--navy);box-shadow:0 1px 2px rgba(18,24,51,.14)}
+.iconbtn{border:0;background:transparent;min-width:44px;min-height:44px;border-radius:12px;display:inline-grid;place-items:center;color:var(--navy);cursor:pointer;transition:background .18s ease}
+.iconbtn:hover{background:var(--ground)}
+.iconbtn svg{width:21px;height:21px}
+.iconbtn.spin svg{animation:spin .8s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.menu{position:absolute;inset-inline-end:16px;top:60px;background:var(--group);border-radius:16px;box-shadow:0 14px 36px rgba(18,24,51,.2);min-width:230px;padding:6px;z-index:40;animation:pop .22s var(--ease-out)}
+@keyframes pop{from{opacity:0;transform:scale(.96) translateY(-4px)}to{opacity:1;transform:none}}
+.menu button{display:block;width:100%;border:0;background:transparent;text-align:start;min-height:46px;padding:0 12px;border-radius:12px;font-size:15.5px;font-weight:600;cursor:pointer}
+.menu button:hover{background:var(--ground)}
+
+main{max-width:1240px;margin:0 auto;padding:24px 20px 80px}
+.reveal>*{opacity:0;transform:translateY(16px);animation:fadeup .6s var(--ease-out) forwards}
+.reveal>*:nth-child(1){animation-delay:.02s}.reveal>*:nth-child(2){animation-delay:.08s}.reveal>*:nth-child(3){animation-delay:.14s}.reveal>*:nth-child(4){animation-delay:.2s}.reveal>*:nth-child(5){animation-delay:.26s}.reveal>*:nth-child(n+6){animation-delay:.3s}
+@keyframes fadeup{to{opacity:1;transform:none}}
+
+/* stage (hero) */
+.stage{position:relative;overflow:hidden;background:var(--navy);color:#fff;border-radius:var(--r-stage);padding:34px 36px 64px;isolation:isolate;margin-bottom:22px}
+.stage .pat{position:absolute;inset:0;background:url(assets/pattern_navy.png) center/cover no-repeat;z-index:-1;transform:scale(1.06);animation:breathe 26s ease-in-out infinite alternate}
+@keyframes breathe{from{transform:scale(1.06) translate3d(-1.2%,-1%,0)}to{transform:scale(1.12) translate3d(1.2%,1%,0)}}
+.stage .pathline{position:absolute;inset-inline:0;bottom:0;width:100%;height:90px;z-index:-1}
+.stage .pathline path{stroke-dasharray:1;stroke-dashoffset:1;animation:dash 2s var(--ease-io) .2s forwards}
+@keyframes dash{to{stroke-dashoffset:0}}
+.hero-top{display:flex;justify-content:space-between;gap:24px;align-items:flex-start;flex-wrap:wrap}
+.stage h1{margin:0 0 6px;font-size:clamp(30px,3.4vw,44px);font-weight:900;line-height:1.1}
+.stage .lede{margin:0;color:#D7DCF2;font-size:17.5px;max-width:58ch}
+.people{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.av{width:42px;height:42px;border-radius:50%;display:grid;place-items:center;font-weight:800;font-size:15px;color:#fff;flex:none;line-height:1;border:2px solid rgba(255,255,255,.85)}
+.av.sm{width:26px;height:26px;font-size:11px;border-width:1.5px}
+.stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-top:26px}
+.stat{background:rgba(255,255,255,.09);border-radius:16px;padding:14px 16px}
+.stat .k{font-size:14px;color:#C9CFEA;font-weight:600}
+.stat .v{font-size:32px;font-weight:900;line-height:1.15;margin-top:2px}
+.stat .v small{font-size:16px;font-weight:700;color:#C9CFEA}
+.demo{display:inline-block;background:var(--gold);color:var(--navy);font-weight:800;border-radius:999px;padding:4px 14px;font-size:14px;margin-bottom:14px}
+
+/* tabs */
+.tabs{display:flex;gap:4px;background:var(--group);border-radius:14px;padding:4px;width:max-content;max-width:100%;overflow-x:auto;margin-bottom:22px}
+.tabs button{border:0;background:transparent;border-radius:11px;min-height:42px;padding:0 18px;font-weight:800;font-size:15.5px;color:var(--ink2);cursor:pointer;white-space:nowrap;transition:background .2s ease,color .2s ease}
+.tabs button[aria-selected="true"]{background:var(--navy);color:#fff}
+
+/* panels */
+.h2{font-size:24px;font-weight:900;margin:34px 0 4px;line-height:1.2}
+.h2+.sub{color:var(--ink2);margin:0 0 14px}
+.panel{background:var(--group);border-radius:var(--r);padding:20px 22px;min-width:0}
+.panel h3{margin:0 0 4px;font-size:18px;font-weight:800}
+.panel .q3{color:var(--ink3);font-size:14.5px;margin:0 0 14px}
+.three{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.three .panel{display:flex;flex-direction:column}
+.big{font-size:26px;font-weight:900;color:var(--navy);line-height:1.2;margin:2px 0 4px}
+.big.ar{font-size:27px}
+.mini{font-size:14px;color:var(--ink2)}
+.kv{display:grid;gap:10px;margin-top:14px;padding-top:14px;border-top:1px solid var(--sep)}
+.kv>div{display:flex;justify-content:space-between;gap:12px;align-items:baseline}
+.kv .k{color:var(--ink2);font-size:14.5px}
+.kv .v{font-weight:800;text-align:end}
+.pill{display:inline-block;border-radius:999px;padding:2px 10px;font-size:13px;font-weight:800}
+.pill.good{background:var(--good-bg);color:var(--good)}.pill.warn{background:var(--warn-bg);color:var(--warn)}.pill.bad{background:var(--bad-bg);color:var(--bad)}.pill.info{background:var(--sel);color:var(--navy)}
+
+/* range chart (budget) */
+.range{position:relative;margin:18px 0 4px;padding-top:4px}
+.range .axis{position:relative;height:10px;background:var(--sel);border-radius:6px}
+.range .ticks{display:flex;justify-content:space-between;font-size:12.5px;color:var(--ink3);margin-top:6px}
+.range .lane{position:relative;height:30px;margin-bottom:6px}
+.range .seg2{position:absolute;top:5px;height:20px;border-radius:10px;background:var(--navy);opacity:.9;transform-origin:left center;transform:scaleX(0);transition:transform .9s var(--ease-expo)}
+.range .seg2.dep{background:repeating-linear-gradient(90deg,var(--ink3) 0 6px,transparent 6px 10px);opacity:.5}
+.range .seg2 .av{position:absolute;top:-3px;inset-inline-start:-4px}
+.range .common{position:absolute;top:-4px;bottom:-4px;background:var(--gold);opacity:.22;border-radius:6px}
+.go .range .seg2{transform:none}
+
+/* timeline (time) */
+.tl{position:relative;margin:22px 4px 8px;height:76px}
+.tl .line{position:absolute;inset-inline:0;top:38px;height:4px;background:var(--sel);border-radius:3px}
+.tl .early{position:absolute;top:36px;height:8px;border-radius:4px;background:var(--gold);inset-inline-start:0;width:0;transition:width 1s var(--ease-expo) .2s}
+.go .tl .early{width:var(--w)}
+.tl .st{position:absolute;top:31px;width:18px;height:18px;margin-inline-start:-9px;border-radius:50%;background:var(--group);border:3px solid var(--sel)}
+.tl .lb{position:absolute;top:56px;transform:translateX(-50%);font-size:13px;color:var(--ink2);white-space:nowrap;font-weight:600}
+.tl .who{position:absolute;top:0;transform:translateX(-50%);display:flex;gap:2px}
+.tl .who .av{opacity:0;transform:translateY(-8px);transition:opacity .4s ease,transform .5s var(--ease-out)}
+.go .tl .who .av{opacity:1;transform:none}
+
+/* findings */
+.find{display:grid;gap:10px}
+.f{display:grid;grid-template-columns:auto minmax(0,1fr);gap:12px;align-items:start;padding:14px 16px;border-radius:14px;background:var(--group)}
+.f .ic{width:30px;height:30px;border-radius:50%;display:grid;place-items:center;flex:none}
+.f .ic svg{width:17px;height:17px}
+.f.good .ic{background:var(--good-bg);color:var(--good)}.f.warn .ic{background:var(--warn-bg);color:var(--warn)}.f.bad .ic{background:var(--bad-bg);color:var(--bad)}.f.info .ic{background:var(--sel);color:var(--navy)}
+.f b.t{display:block;font-weight:800;font-size:16.5px;margin-bottom:2px}
+.f .d{color:var(--ink2)}
+.f .d b{color:var(--ink)}
+
+/* agreement map */
+.agree-list{display:grid;gap:4px}
+.ag{display:grid;grid-template-columns:44px minmax(0,1.2fr) minmax(0,1.6fr) 52px;gap:12px;align-items:center;padding:7px 0;border-bottom:1px solid var(--sep);cursor:pointer;background:none;border-inline:0;border-top:0;text-align:start;width:100%}
+.ag:last-child{border-bottom:0}
+.ag:hover .lbl{color:var(--navy)}
+.ag .id{font-weight:800;color:var(--gold-ink)}
+.ag .lbl{font-weight:700;transition:color .18s ease}
+.ag .tr{height:10px;background:var(--sel);border-radius:6px;overflow:hidden}
+.ag .tr i{display:block;height:100%;width:0;border-radius:6px;transition:width .9s var(--ease-expo)}
+.ag .pc{font-weight:800;text-align:end}
+.lv-good i{background:var(--good)}.lv-warn i{background:var(--gold)}.lv-bad i{background:var(--bad)}
+
+/* question cards */
+.qgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.qc{scroll-margin-top:90px;transition:box-shadow .4s ease}
+.qc.flash{box-shadow:0 0 0 3px var(--gold)}
+.qc h4{margin:0 0 4px;font-size:16.5px;line-height:1.4;font-weight:800}
+.qc .qid{color:var(--gold-ink);font-weight:900;margin-inline-end:8px}
+.qc .meta{font-size:13.5px;color:var(--ink3);margin-bottom:12px;display:flex;gap:12px;flex-wrap:wrap;align-items:center}
+.opt{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr) 28px;gap:12px;align-items:center;padding:6px 0}
+.opt .lbl{font-size:14.5px;line-height:1.35}
+.opt .tr{height:16px;background:var(--soft);border-radius:8px;overflow:hidden;position:relative}
+.opt .tr i{display:block;height:100%;width:0;background:#9AA5D6;border-radius:8px;transition:width .9s var(--ease-expo)}
+.opt.top .tr i{background:var(--gold)}
+.opt.top .lbl{font-weight:800}
+.opt .n{font-weight:900;text-align:end;color:var(--navy)}
+.opt .whos{grid-column:1/-1;display:flex;gap:4px;margin-top:-2px}
+.texts{display:grid;gap:10px}
+.tx{display:grid;grid-template-columns:auto minmax(0,1fr);gap:10px;align-items:start}
+.tx .by{font-size:13px;color:var(--ink3);font-weight:700}
+.tx .t{white-space:pre-wrap;overflow-wrap:anywhere}
+.empty{color:var(--ink3)}
+.sec-h{display:flex;align-items:baseline;gap:12px;margin:34px 0 12px}
+.sec-h h2{margin:0;font-size:22px;font-weight:900}
+.sec-h span{color:var(--ink3);font-weight:700}
+
+/* compare matrix */
+.mx-wrap{background:var(--group);border-radius:var(--r);overflow:auto;max-height:76vh}
+table.mx{border-collapse:separate;border-spacing:0;width:100%;min-width:720px;font-size:14.5px}
+.mx th,.mx td{padding:10px 14px;text-align:start;vertical-align:top;border-bottom:1px solid var(--sep)}
+.mx thead th{position:sticky;top:0;background:var(--group);z-index:2;font-weight:800;box-shadow:0 1px 0 var(--sep)}
+.mx thead th .ph{display:flex;gap:8px;align-items:center}
+.mx tbody th{position:sticky;inset-inline-start:0;background:var(--group);z-index:1;font-weight:700;min-width:210px;max-width:260px}
+.mx tbody th .id{color:var(--gold-ink);font-weight:900;margin-inline-end:6px}
+.mx tr.sec td,.mx tr.sec th{background:var(--soft);font-weight:900;color:var(--navy);font-size:15px}
+.mx td.diff{background:var(--warn-bg)}
+.mx td.none{color:var(--ink3)}
+.mx td .t{white-space:pre-wrap;overflow-wrap:anywhere}
+.legend{display:flex;gap:16px;flex-wrap:wrap;font-size:14px;color:var(--ink2);margin:0 0 12px}
+.legend i{display:inline-block;width:14px;height:14px;border-radius:4px;vertical-align:-2px;margin-inline-end:6px}
+
+/* person */
+.pp{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px}
+.pp button{display:flex;gap:10px;align-items:center;border:0;background:var(--group);border-radius:999px;padding:5px 16px 5px 5px;min-height:46px;cursor:pointer;font-weight:700;transition:background .2s ease,color .2s ease}
+.pp button .av{border-color:#fff}
+.pp button[aria-pressed="true"]{background:var(--navy);color:#fff}
+.phead{display:flex;gap:20px;align-items:center;flex-wrap:wrap}
+.ring{width:84px;height:84px;position:relative;flex:none}
+.ring svg{width:100%;height:100%;transform:rotate(-90deg)}
+.ring circle.f2{transition:stroke-dashoffset 1.1s var(--ease-expo)}
+.ring b{position:absolute;inset:0;display:grid;place-items:center;font-size:20px;font-weight:900}
+.ans{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);gap:4px 22px;padding:11px 0;border-bottom:1px solid var(--sep)}
+.ans:last-child{border-bottom:0}
+.ans .q{color:var(--ink2);font-size:14.5px}
+.ans .q b{color:var(--gold-ink);margin-inline-end:6px}
+.ans .a{font-weight:800;white-space:pre-wrap;overflow-wrap:anywhere}
+.ans .a.none{color:var(--ink3);font-weight:400}
+.ans .a .tagm{display:inline-block;margin-inline-start:8px;font-size:12px;font-weight:800;color:var(--warn);background:var(--warn-bg);border-radius:999px;padding:1px 8px;vertical-align:1px}
+.stack{display:grid;gap:16px}
+
+/* connect */
+.conn{max-width:620px;margin:10px auto}
+.conn .stage{padding:34px}
+.field{display:grid;gap:6px;margin-top:14px}
+.field label{font-weight:800;font-size:14px;color:#D7DCF2}
+.field input{border:0;border-radius:12px;padding:12px 14px;background:#fff;color:var(--ink);width:100%}
+.btn{border:0;border-radius:999px;min-height:48px;padding:0 24px;font-weight:800;font-size:16px;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;gap:8px;text-decoration:none;transition:background .18s ease,transform .14s var(--ease-out)}
+.btn:active{transform:scale(.97)}
+.btn.g{background:var(--gold);color:var(--navy)}
+.btn.o{background:rgba(255,255,255,.12);color:#fff}
+.err{background:var(--bad-bg);color:var(--bad);border-radius:12px;padding:10px 14px;font-weight:700;margin-top:14px}
+.loading{display:grid;place-items:center;padding:80px 0;color:var(--ink2);gap:14px}
+.loading svg{width:120px}
+.loading path{stroke-dasharray:1;stroke-dashoffset:1;animation:dashloop 1.6s var(--ease-io) infinite}
+@keyframes dashloop{0%{stroke-dashoffset:1}60%{stroke-dashoffset:0}100%{stroke-dashoffset:-1}}
+
+@media (max-width:1000px){.three{grid-template-columns:1fr}.qgrid{grid-template-columns:1fr}.stats{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:640px){
+  .appbar-in{padding-inline:12px;gap:6px}.appbar .ttl{display:none}.appbar img{height:28px}
+  main{padding:14px 14px 70px}.stage{padding:24px 20px 22px;border-radius:22px}
+  .ag{grid-template-columns:36px minmax(0,1fr) 46px}.ag .tr{grid-column:2/4;grid-row:2}
+  .ans{grid-template-columns:1fr}.opt{grid-template-columns:minmax(0,1fr) 90px 24px}
+}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:1ms!important;animation-delay:0s!important;transition-duration:1ms!important}.stage .pat{animation:none}}
+@media print{
+  body{background:#fff;font-size:11pt}.appbar,.tabs,.no-print{display:none!important}
+  main{padding:0;max-width:none}.stage{background:#fff;color:var(--ink);border:2px solid var(--navy);padding:16px}.stage .pat,.stage .pathline{display:none}
+  .stage .lede,.stat .k,.stat .v small{color:var(--ink2)}.stat{background:var(--soft)}.av{border-color:#fff}
+  .panel,.f,.qc{break-inside:avoid;border:1px solid var(--sep)}.reveal>*{opacity:1!important;transform:none!important;animation:none!important}
+  .mx-wrap{max-height:none;overflow:visible}
+}
 </style>
 </head>
 <body>
-<header class="bar"><div class="bar-in">
-  <div style="display:flex;gap:14px;align-items:center"><img src="assets/horiz_white.png" alt="Al-Masar"><div><h1>Management discovery · Results</h1><div class="sub">Consultant view · private</div></div></div>
-  <div class="acts">
-    <button class="btn" type="button" id="langBtn">Show answers in Arabic</button>
-    <button class="btn" type="button" id="refresh">Refresh</button>
-    <button class="btn" type="button" id="csv">Download CSV</button>
-    <button class="btn" type="button" id="json">Download JSON</button>
-    <button class="btn" type="button" id="prt">Print</button>
+<header class="appbar">
+  <div class="appbar-in">
+    <img src="assets/horiz.png" alt="Al-Masar Insurance">
+    <div class="ttl">Owners' answers<small>Private consultant view</small></div>
+    <div class="sp"></div>
+    <div class="seg no-print" role="group" aria-label="Answer language">
+      <button type="button" id="l_en">English</button>
+      <button type="button" id="l_ar" lang="ar">عربي</button>
+    </div>
+    <button class="iconbtn" type="button" id="refresh" title="Refresh answers" aria-label="Refresh answers"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 11a8 8 0 1 0-2.3 5.7M20 4v7h-7"/></svg></button>
+    <button class="iconbtn" type="button" id="exportBtn" title="Export" aria-label="Export" aria-haspopup="menu" aria-expanded="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12M7 10l5 5 5-5M5 21h14"/></svg></button>
   </div>
-</div></header>
+  <div class="menu" id="menu" role="menu" hidden>
+    <button type="button" role="menuitem" id="prt">Print or save as PDF</button>
+    <button type="button" role="menuitem" id="csv">Download spreadsheet (CSV)</button>
+    <button type="button" role="menuitem" id="json">Download raw data (JSON)</button>
+    <button type="button" role="menuitem" id="disc">Disconnect this device</button>
+  </div>
+</header>
 <main id="main"></main>
 
 <script src="questions.js"></script>
@@ -97,153 +260,280 @@ select,input[type=text],input[type=password]{font:inherit;padding:8px 10px;borde
 <script>
 (function(){
 const SV=window.SURVEY,CFG=window.SURVEY_CONFIG||{};
-const LS="almasar-dashboard-conn";
+const LS="almasar-dashboard-conn",LSV="almasar-dashboard-view";
 const ALLQ=[];SV.sections.forEach(s=>s.q.forEach(q=>{q.sec=s;ALLQ.push(q)}));
 const QI=Object.fromEntries(ALLQ.map(q=>[q.id,q]));
+const RM=window.matchMedia&&matchMedia("(prefers-reduced-motion: reduce)").matches;
 let conn={};try{conn=JSON.parse(localStorage.getItem(LS)||"{}")||{}}catch(e){}
 const hp=new URLSearchParams(location.hash.slice(1));
 if(hp.get("key")){conn.key=hp.get("key");try{localStorage.setItem(LS,JSON.stringify(conn))}catch(e){};history.replaceState(null,"",location.pathname+location.search)}
 const demo=new URLSearchParams(location.search).get("demo")==="1";
-let R=[],L=0,view="all",person=null,err="";
+let saved={};try{saved=JSON.parse(localStorage.getItem(LSV)||"{}")||{}}catch(e){}
+let R=undefined,L=saved.L===1?1:0,view=saved.view||"plan",person=null,err="";
 const $=(s,r=document)=>r.querySelector(s);
 const esc=s=>String(s==null?"":s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
-const txt=a=>`<span class="${L?"ar":""}">${esc(a[L])}</span>`;
+const tx=a=>`<span class="${L?"ar":""}" ${L?'lang="ar" dir="rtl"':""}>${esc(a[L])}</span>`;
 const endpoint=()=>conn.endpoint||CFG.endpoint||"";
+const keep=()=>{try{localStorage.setItem(LSV,JSON.stringify({L,view}))}catch(e){}};
 
 const DEMO=[
- {id:"d1",name:"Demo owner A",role:"Chairman",lang:"ar",receivedAt:"2026-11-02T10:12:00Z",answers:{A1:1,A2:0,A3:0,A4:[0,1],B1:[1,3,2],B2:1,B3:2,B4:[0,1],B5:"أن نكون ضمن أول 10 شركات في طرابلس",C1:1,C2:"أحمد – مدير المبيعات",C3:1,C4:[0,2],C5:0,C6:0,D1:[0,2],D2:2,D3:"سرعة الإصدار والتعامل المحترم",D4:"العالمية، لأن حضورها قوي",D5:[0,2],D5_c:"",D6:"3 مكاتب و8 موظفين",E1:"أن ندفع دون أن نرى نتائج واضحة",E2:""}},
- {id:"d2",name:"Demo owner B",role:"Board member",lang:"ar",receivedAt:"2026-11-02T12:40:00Z",answers:{A1:0,A2:2,A3:2,A4:[0,2],B1:[0,1],B2:0,B3:2,B4:[4],B5:"زيادة المبيعات",C1:0,C2:"",C3:2,C4:[2],C5:0,C6:2,D1:[0,1],D2:1,D3:"",D4:"البركة",D5:[0],D5_c:"",D6:"",E1:"التكلفة",E2:"نريد أن نبدأ بالمركبات"}},
+ {id:"d1",name:"Demo owner A",role:"Chairman",lang:"ar",receivedAt:"2026-11-02T10:12:00Z",answers:{A1:1,A2:0,A3:0,A4:[0,1],B1:[1,3,2],B2:1,B3:2,B4:[0,1],B5:"أن نكون ضمن أول 10 شركات في طرابلس",C1:1,C2:"أحمد – مدير المبيعات",C3:1,C4:[0,2],C5:0,C6:0,D1:[0,2],D2:2,D3:"سرعة الإصدار والتعامل المحترم",D4:"العالمية، لأن حضورها قوي",D5:[0,2],D6:"3 مكاتب و8 موظفين",E1:"أن ندفع دون أن نرى نتائج واضحة",E2:""}},
+ {id:"d2",name:"Demo owner B",role:"Board member",lang:"ar",receivedAt:"2026-11-02T12:40:00Z",answers:{A1:0,A2:2,A3:2,A4:[0,2],B1:[0,1],B2:0,B3:2,B4:[4],B5:"زيادة المبيعات",C1:0,C2:"",C3:2,C4:[2],C5:0,C6:2,D1:[0,1],D2:1,D3:"",D4:"البركة",D5:[0],D6:"",E1:"التكلفة",E2:"نريد أن نبدأ بالمركبات"}},
  {id:"d3",name:"Demo owner C",role:"General Manager",lang:"ar",receivedAt:"2026-11-03T09:05:00Z",answers:{A1:1,A2:0,A3:0,A4:[1,2],B1:[1,2,5],B2:2,B3:2,B4:[0,1,2],B5:"عملاء مؤسسيون أكثر وثقة أكبر في السوق",C1:1,C2:"سارة – العلاقات العامة",C3:1,C4:[0,1],C5:1,C6:0,D1:[2,0],D2:0,D3:"خدمة سريعة ومتابعة شخصية",D4:"المتحدة بسبب علاقاتها مع الشركات",D5:[0,1,3],D5_c:"تسوية خلال 15 يوم عمل للمركبات",D6:"3 مكاتب، 9 مندوبين",E1:"ألا يفهم الفريق طبيعة سوق التأمين",E2:""}}
 ];
 
+/* ---------- helpers ---------- */
+const COLORS=["#172A77","#C98A00","#3F55B5","#0E7C66","#8B3A62","#5B6478","#B4532A","#2F6F9F"];
+function initials(n){const w=String(n||"?").trim().split(/\s+/).filter(Boolean);return ((w[0]||"?")[0]+(w.length>1?w[w.length-1][0]:"")).toUpperCase()}
+let PC={};
+const av=(r,sm)=>`<span class="av ${sm?"sm":""}" style="background:${PC[r.id]||COLORS[0]}" title="${esc(r.name)}${r.role?" · "+esc(r.role):""}" aria-label="${esc(r.name)}">${esc(initials(r.name))}</span>`;
+const nm=r=>esc(String(r.name||"?").trim());
+const names=a=>a.map(nm).join(", ");
 function ansText(q,a,lang){const v=a[q.id];let s="";
   if(q.type==="single")s=v!=null&&q.o[v]?q.o[v][lang]:"";
-  else if(q.type==="multi")s=Array.isArray(v)?v.map(i=>q.o[i]&&q.o[i][lang]).filter(Boolean).join(" · "):"";
+  else if(q.type==="multi")s=Array.isArray(v)?v.map(i=>q.o[i]&&q.o[i][lang]).filter(Boolean).join(lang?"، ":", "):"";
   else s=v||"";
-  if(q.comment&&a[q.id+"_c"])s+=(s?" — ":"")+a[q.id+"_c"];
-  return s}
+  if(q.comment&&a[q.id+"_c"])s+=(s?" — ":"")+a[q.id+"_c"];return s}
 const has=(q,a)=>{const v=a[q.id];return q.type==="single"?v!=null:q.type==="multi"?Array.isArray(v)&&v.length>0:!!(v&&String(v).trim())};
-const first=n=>String(n||"?").trim();
+const by=(rows,id,i)=>rows.filter(r=>{const v=r.answers[id];return Array.isArray(v)?v.includes(i):v===i});
+const answered=(rows,id)=>rows.filter(r=>has(QI[id],r.answers));
+function dist(q,rows){const c=q.o.map(()=>[]);rows.forEach(r=>{const v=r.answers[q.id];if(q.type==="single"&&v!=null&&c[v])c[v].push(r);if(q.type==="multi"&&Array.isArray(v))v.forEach(i=>c[i]&&c[i].push(r))});return c}
+function topOpt(q,rows){const c=dist(q,rows);let b=-1,n=0,tie=false;c.forEach((x,i)=>{if(x.length>n){n=x.length;b=i;tie=false}else if(x.length===n&&n>0)tie=true});return {i:b,n,tie,c}}
+function agreement(q,rows){const ans=rows.filter(r=>has(q,r.answers));if(ans.length<2)return null;
+  if(q.type==="single"){const c=dist(q,ans);return Math.max(...c.map(x=>x.length))/ans.length}
+  let s=0,n=0;for(let i=0;i<ans.length;i++)for(let j=i+1;j<ans.length;j++){const a=new Set(ans[i].answers[q.id]),b=new Set(ans[j].answers[q.id]);const inter=[...a].filter(x=>b.has(x)).length;const uni=new Set([...a,...b]).size;s+=uni?inter/uni:1;n++}
+  return n?s/n:null}
+const lvl=p=>p>=.75?"good":p>=.5?"warn":"bad";
+const fmtK=n=>n>=1000?(n/1000).toLocaleString("en")+"k":String(n);
+const ICON={good:'<path d="M5 12.5l4.5 4.5L19 7.5"/>',warn:'<path d="M12 8v5M12 16.5v.5"/>',bad:'<path d="M12 7v6M12 16.5v.5"/>',info:'<path d="M12 11v6M12 7.5v.5"/>'};
+const f=(lv,t,d)=>({lv,t,d});
+const fHTML=F=>`<div class="find">${F.map(x=>`<div class="f ${x.lv}"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${ICON[x.lv]}</svg></span><div><b class="t">${x.t}</b><div class="d">${x.d}</div></div></div>`).join("")}</div>`;
 
+/* ---------- loading ---------- */
 async function load(){
   err="";
-  if(demo){R=DEMO;render();return}
+  if(demo){R=DEMO;prep();render();return}
   if(!endpoint()||!conn.key){R=null;render();return}
-  $("#main").innerHTML=`<div class="card">Loading answers…</div>`;
+  if(R===undefined)$("#main").innerHTML=`<div class="loading">${loopSvg()}<div>Loading the owners' answers…</div></div>`;
+  $("#refresh").classList.add("spin");
   try{
     const r=await fetch(endpoint()+(endpoint().includes("?")?"&":"?")+"key="+encodeURIComponent(conn.key)+"&t="+Date.now());
     const j=await r.json();
-    if(!j.ok||!Array.isArray(j.responses)){R=null;err="The key was not accepted. Check the key in the 'Dashboard key' tab of your Google Sheet.";render();return}
-    R=j.responses.map(x=>({...x,answers:x.answers||{}})).sort((a,b)=>String(a.receivedAt).localeCompare(String(b.receivedAt)));
-    // keep only the latest submission per name
-    const byName={};R.forEach(x=>byName[(x.name||"").trim().toLowerCase()]=x);R=Object.values(byName);
-  }catch(e){R=null;err="Could not reach the answer store. Check the Web app URL and that it is deployed with access set to Anyone."}
-  render();
+    if(!j.ok||!Array.isArray(j.responses)){R=null;err="The key was not accepted. Copy it again from the Dashboard key tab in your Google Sheet.";}
+    else{let rows=j.responses.map(x=>({...x,answers:x.answers||{}})).sort((a,b)=>String(a.receivedAt).localeCompare(String(b.receivedAt)));
+      const byName={};rows.forEach(x=>byName[(x.name||"").trim().toLowerCase()]=x);R=Object.values(byName);prep()}
+  }catch(e){R=null;err="Could not reach the answer store. Check the connection and that the web app is deployed with access set to Anyone."}
+  $("#refresh").classList.remove("spin");render();
 }
+function prep(){PC={};R.forEach((r,i)=>PC[r.id]=COLORS[i%COLORS.length])}
+const loopSvg=()=>`<svg viewBox="0 0 120 60" aria-hidden="true"><path pathLength="1" d="M60 30 C 72 10, 112 8, 112 30 C 112 52, 74 52, 60 30 C 46 8, 8 8, 8 30 C 8 52, 48 50, 60 30" fill="none" stroke="#EAA918" stroke-width="5" stroke-linecap="round"/></svg>`;
+const pathLine=()=>`<svg class="pathline" viewBox="0 0 1200 90" preserveAspectRatio="none" aria-hidden="true"><path pathLength="1" d="M-10 70 C 260 10, 470 92, 720 40 S 1070 6, 1210 30" fill="none" stroke="#EAA918" stroke-width="3.5"/><path pathLength="1" d="M-10 84 C 270 30, 490 98, 740 54 S 1080 22, 1210 46" fill="none" stroke="#EAA918" stroke-width="1.5" opacity=".45"/></svg>`;
 
+/* ---------- connect ---------- */
 function connectView(){
-  return `<div class="card conn"><h2>Connect to the answer store</h2>
-  <p style="margin:0;color:var(--muted)">Paste the Web app URL from Google Apps Script and the private key from the "Dashboard key" tab of your Google Sheet. They are saved only on this device.</p>
-  <div><label for="ep">Web app URL</label><input type="text" id="ep" style="width:100%" value="${esc(endpoint())}" placeholder="https://script.google.com/macros/s/…/exec"></div>
-  <div><label for="ky">Dashboard key</label><input type="password" id="ky" style="width:100%" value="${esc(conn.key||"")}"></div>
-  ${err?`<div class="err">${esc(err)}</div>`:""}
-  <div style="display:flex;gap:10px;flex-wrap:wrap"><button class="btn p" id="go" type="button">Connect</button><a class="btn" href="?demo=1">Preview with demo data</a></div></div>`;
+  return `<div class="conn reveal"><section class="stage"><div class="pat"></div>
+    <h1>Connect the answers</h1><p class="lede">Paste the private key from the Dashboard key tab of your Google Sheet. It is saved on this device only, and the survey page never sees it.</p>
+    ${CFG.endpoint?"":`<div class="field"><label for="ep">Web app URL</label><input type="text" id="ep" value="${esc(endpoint())}" placeholder="https://script.google.com/macros/s/…/exec"></div>`}
+    <div class="field"><label for="ky">Dashboard key</label><input type="password" id="ky" value="${esc(conn.key||"")}" autocomplete="off"></div>
+    ${err?`<div class="err">${esc(err)}</div>`:""}
+    <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:20px;margin-bottom:34px"><button class="btn g" id="go" type="button">Show answers</button><a class="btn o" href="?demo=1">Preview with demo data</a></div>
+    ${pathLine()}</section></div>`;
 }
 
-function dist(q,rows){const c=q.o.map(()=>[]);rows.forEach(r=>{const v=r.answers[q.id];if(q.type==="single"&&v!=null&&c[v])c[v].push(r);if(q.type==="multi"&&Array.isArray(v))v.forEach(i=>c[i]&&c[i].push(r))});return c}
-function agreement(q,rows){const ans=rows.filter(r=>has(q,r.answers));if(ans.length<2)return null;
-  if(q.type==="single"){const c=dist(q,ans);return Math.max(...c.map(x=>x.length))/ans.length}
-  // multi: average pairwise overlap (Jaccard)
-  let s=0,n=0;for(let i=0;i<ans.length;i++)for(let j=i+1;j<ans.length;j++){const a=new Set(ans[i].answers[q.id]),b=new Set(ans[j].answers[q.id]);const inter=[...a].filter(x=>b.has(x)).length;const uni=new Set([...a,...b]).size;s+=uni?inter/uni:1;n++}
-  return n?s/n:null}
+/* ---------- hero ---------- */
+function hero(rows){
+  const N=rows.length;
+  const avg=N?Math.round(rows.reduce((s,r)=>s+ALLQ.filter(q=>has(q,r.answers)).length,0)/N/ALLQ.length*100):0;
+  const sq=ALLQ.filter(q=>q.o).map(q=>agreement(q,rows)).filter(x=>x!=null);
+  const agr=sq.length?Math.round(sq.reduce((a,b)=>a+b,0)/sq.length*100):null;
+  const last=N?new Date(rows.map(r=>r.receivedAt).sort().pop()):null;
+  const lastS=last&&!isNaN(last)?last.toLocaleDateString("en-GB",{day:"numeric",month:"short"}):"—";
+  return `<section class="stage"><div class="pat"></div>
+    ${demo?`<span class="demo">Demo data. Open the page without ?demo=1 to see real answers.</span>`:""}
+    <div class="hero-top"><div><h1>What the owners told us</h1><p class="lede">${N?`${N} ${N===1?"person has":"people have"} answered. The plan inputs below are read straight from their answers. Check any name against the comparison table before you quote it.`:"No answers yet. Share the survey link, then refresh this page."}</p></div>
+    <div class="people">${rows.map(r=>av(r)).join("")}</div></div>
+    <div class="stats">
+      <div class="stat"><div class="k">Respondents</div><div class="v num" data-count="${N}">0</div></div>
+      <div class="stat"><div class="k">Average completion</div><div class="v num"><span data-count="${avg}">0</span><small>%</small></div></div>
+      <div class="stat"><div class="k">Agreement across owners</div><div class="v num">${agr==null?"—":`<span data-count="${agr}">0</span><small>%</small>`}</div></div>
+      <div class="stat"><div class="k">Last answer</div><div class="v" style="font-size:26px">${esc(lastS)}</div></div>
+    </div>${pathLine()}</section>`;
+}
 
+/* ---------- plan inputs: the owners' three questions ---------- */
+const BANDS=[[300,400],[400,500],[500,750],[750,1000]];
+function costPanel(rows){
+  const a1=answered(rows,"A1");const num=a1.filter(r=>r.answers.A1<4),dep=a1.filter(r=>r.answers.A1===4);
+  let head="No answer yet",sub="";
+  let common=null;
+  if(num.length){const lo=Math.max(...num.map(r=>BANDS[r.answers.A1][0])),hi=Math.min(...num.map(r=>BANDS[r.answers.A1][1]));
+    if(lo<hi){common=[lo,hi];head=`${fmtK(lo*1000)} – ${fmtK(hi*1000)} LYD`;sub="Every owner who gave a range accepts this band";}
+    else{const minHi=Math.min(...num.map(r=>BANDS[r.answers.A1][1]));head=`Up to ${fmtK(minHi*1000)} LYD`;sub="Ranges don't overlap. Use the lowest ceiling for the base plan and show the larger plan as an option.";}
+  }else if(dep.length){head="Waiting for our proposal";sub="All who answered said it depends on the plan"}
+  const pos=v=>(v-300)/700*100;
+  const lanes=a1.map(r=>{const v=r.answers.A1;if(v===4)return `<div class="lane"><div class="seg2 dep" style="inset-inline-start:0;width:100%">${av(r,1)}</div></div>`;
+    const [lo,hi]=BANDS[v];return `<div class="lane"><div class="seg2" style="inset-inline-start:${pos(lo)}%;width:${pos(hi)-pos(lo)}%;background:${PC[r.id]}">${av(r,1)}</div></div>`}).join("");
+  const range=a1.length?`<div class="range">${lanes}<div class="axis">${common?`<div class="common" style="inset-inline-start:${pos(common[0])}%;width:${pos(common[1])-pos(common[0])}%"></div>`:""}</div><div class="ticks num"><span>300k</span><span>500k</span><span>750k</span><span>1M LYD</span></div></div>`:"";
+  const a2=topOpt(QI.A2,answered(rows,"A2")),a3d=dist(QI.A3,answered(rows,"A3"));
+  const fee=a2.i<0?"—":a2.tie?"Split":esc(QI.A2.o[a2.i][0]);
+  const commit=answered(rows,"A3").length?(a3d[2].length?`<span class="pill warn">${a3d[2].length} want to discuss</span>`:`<span class="pill good">Accepted</span>`):"—";
+  return `<div class="panel"><h3>How much will it cost?</h3><p class="q3">Yearly budget, fee payment and commitment</p>
+    <div class="big num">${head}</div><div class="mini">${sub}</div>${range}
+    <div class="kv"><div><span class="k">Preferred fee payment</span><span class="v">${fee}</span></div>
+    <div><span class="k">6-month commitment</span><span class="v">${commit}</span></div>
+    <div><span class="k">Budget first goes to</span><span class="v">${topList(QI.A4,rows)}</span></div></div></div>`;
+}
+function topList(q,rows,k=2){const c=dist(q,answered(rows,q.id)).map((x,i)=>[x.length,i]).filter(x=>x[0]>0).sort((a,b)=>b[0]-a[0]).slice(0,k);return c.length?c.map(x=>esc(q.o[x[1]][0])).join(", "):"—"}
+function timePanel(rows){
+  const b2=answered(rows,"B2");const months=[1,3,6,12];
+  const pos=i=>[0,33.3,66.6,100][i];
+  const groups=[0,1,2,3].map(i=>by(b2,"B2",i));
+  const earliest=groups.findIndex(g=>g.length);
+  const head=earliest<0?"No answer yet":`${months[earliest]} ${months[earliest]===1?"month":"months"}`;
+  const sub=earliest<0?"":`Earliest expectation, from ${names(groups[earliest])}`;
+  const tl=`<div class="tl" style="--w:33.3%"><div class="line"></div><div class="early" title="Months 1–3: early indicators"></div>${[0,1,2,3].map(i=>`<span class="st" style="inset-inline-start:${pos(i)}%"></span><span class="lb" style="left:${pos(i)}%">${months[i]===12?"1 year":months[i]+(months[i]===1?" month":" months")}</span>${groups[i].length?`<span class="who" style="left:${pos(i)}%">${groups[i].map(r=>av(r,1)).join("")}</span>`:""}`).join("")}</div>`;
+  const track=answered(rows,"B4"),none=by(rows,"B4",4);
+  return `<div class="panel"><h3>How long until results?</h3><p class="q3">When they expect the first clear results</p>
+    <div class="big num">${head}</div><div class="mini">${sub}</div>${tl}
+    <div class="mini" style="margin-top:4px"><span class="pill info">Gold</span> months 1–3: agree early signs of progress (inquiries, leads) so results are visible from the start.</div>
+    <div class="kv"><div><span class="k">Results that prove success</span><span class="v">${topList(QI.B1,rows,3)}</span></div>
+    <div><span class="k">Policies per month today</span><span class="v">${single(QI.B3,rows)}</span></div>
+    <div><span class="k">Tracking today</span><span class="v">${!track.length?"—":none.length?`<span class="pill bad">Nothing tracked (${none.length})</span>`:topList(QI.B4,rows,3)}</span></div></div></div>`;
+}
+function single(q,rows){const t=topOpt(q,answered(rows,q.id));return t.i<0?"—":t.tie?"Split":esc(q.o[t.i][0])}
+function workPanel(rows){
+  const c1=topOpt(QI.C1,answered(rows,"C1"));
+  const head=c1.i<0?"No answer yet":c1.tie?"Owners are split":esc(QI.C1.o[c1.i][0]);
+  const c3=answered(rows,"C3");const slow=c3.length?Math.max(...c3.map(r=>r.answers.C3)):-1;
+  const rep=[...new Set(answered(rows,"C4").flatMap(r=>r.answers.C4))].sort().map(i=>esc(QI.C4.o[i][0]));
+  const contacts=answered(rows,"C2").map(r=>`<span ${/[؀-ۿ]/.test(r.answers.C2)?'class="ar" dir="rtl"':""}>${esc(r.answers.C2)}</span>`);
+  return `<div class="panel"><h3>How will the work run?</h3><p class="q3">Involvement, approvals, reporting and contact</p>
+    <div class="big">${head}</div><div class="mini">${c1.i<0?"":`Involvement level most chosen (${c1.n} of ${answered(rows,"C1").length})`}</div>
+    <div class="kv"><div><span class="k">Plan approvals around</span><span class="v">${slow<0?"—":esc(QI.C3.o[slow][0])+(slow===2?' <span class="pill warn">slow</span>':"")}</span></div>
+    <div><span class="k">Reporting (everything asked for)</span><span class="v">${rep.join(", ")||"—"}</span></div>
+    <div><span class="k">Day-to-day contact</span><span class="v">${contacts.join("<br>")||"—"}</span></div>
+    <div><span class="k">Marketing staff today</span><span class="v">${single(QI.C5,rows)}</span></div>
+    <div><span class="k">Plan to hire</span><span class="v">${single(QI.C6,rows)}</span></div></div></div>`;
+}
+
+/* ---------- findings ---------- */
 function findings(rows){
-  const F=[],N=rows.length,pick=(id)=>rows.filter(r=>has(QI[id],r.answers));
-  const names=arr=>arr.map(r=>esc(first(r.name))).join(", ");
-  const by=(id,i)=>rows.filter(r=>{const v=r.answers[id];return Array.isArray(v)?v.includes(i):v===i});
-  // Budget
-  const a1=pick("A1");if(a1.length){const c=dist(QI.A1,a1);const top=c.map((x,i)=>[x.length,i]).sort((a,b)=>b[0]-a[0])[0];
-    const low=by("A1",0),dep=by("A1",4),high=[...by("A1",2),...by("A1",3)];
-    F.push(["info","Budget",`Most common range: <b>${esc(QI.A1.o[top[1]][0])}</b> (${top[0]} of ${a1.length}).${high.length?` Open to more than 500k: ${names(high)}.`:""}${dep.length?` Waiting for our proposal: ${names(dep)}.`:""}`]);
-    if(low.length&&high.length)F.push(["warn","Budget gap",`Budget views are far apart: ${names(low)} chose 300–400k while ${names(high)} chose above 500k. Present two scenarios.`]);}
-  // Fees
-  const a2=pick("A2");if(a2.length){const c=dist(QI.A2,a2);const t=c.map((x,i)=>[x.length,i]).sort((a,b)=>b[0]-a[0])[0];F.push(["info","Fee payment",`Preferred: <b>${esc(QI.A2.o[t[1]][0])}</b> (${t[0]} of ${a2.length}).`])}
-  // Commitment
-  const a3=pick("A3");if(a3.length){const yes=[...by("A3",0),...by("A3",1)],disc=by("A3",2);
-    F.push([disc.length?"warn":"good","6-month commitment",disc.length?`Want to discuss the 6-month commitment: ${names(disc)}. Prepare the case for it.`:`All who answered accept the commitment${by("A3",1).length?`; ${names(by("A3",1))} would commit to 12 months`:""}.`])}
-  // Timing expectation
-  const fast=[...by("B2",0),...by("B2",1)];if(fast.length){const one=by("B2",0);
-    F.push([one.length?"bad":"warn","Results expectation",`Expect clear results within ${one.length?"1 month":"3 months"}: ${names(fast)}. The plan starts campaigns in months 4–6, so agree on early indicators (inquiries, leads) for months 1–3.`])}
-  // Tracking
-  const none=by("B4",4);if(none.length)F.push(["bad","No baseline",`Nothing is tracked today, according to ${names(none)}. Set up basic tracking (policies, inquiries, source) in month 1, or results cannot be proven.`]);
-  // Involvement & approvals
-  const micro=by("C1",0),slow=by("C3",2);if(micro.length)F.push(["warn","Approvals",`Want to approve every post and ad: ${names(micro)}.${slow.length?` Expect approvals to take up to a week: ${names(slow)}.`:""} Propose a monthly content calendar approved in one sitting.`]);
-  // Capability
-  const noStaff=by("C5",0),noHire=by("C6",1);if(noStaff.length)F.push([noHire.length?"warn":"info","In-house team",`No marketing staff today (${names(noStaff)}).${noHire.length?` No plan to hire: ${names(noHire)}, so training and handover need to be lighter.`:" Hiring support is a selling point."}`]);
-  // Products & focus
-  const d1=pick("D1");if(d1.length){const c=dist(QI.D1,d1).map((x,i)=>[x.length,i]).sort((a,b)=>b[0]-a[0]).filter(x=>x[0]>0).slice(0,2);F.push(["info","Products first",c.map(x=>`<b>${esc(QI.D1.o[x[1]][0])}</b> (${x[0]})`).join(" and ")])}
-  const d2=pick("D2");if(d2.length){const c=dist(QI.D2,d2);const t=c.map((x,i)=>[x.length,i]).sort((a,b)=>b[0]-a[0])[0];F.push([agreement(QI.D2,rows)===1?"good":"warn","Main focus",`<b>${esc(QI.D2.o[t[1]][0])}</b> (${t[0]} of ${d2.length})${agreement(QI.D2,rows)===1?", all agree.":"; owners are split."}`])}
-  // Proof points
-  const d5=pick("D5");if(d5.length){const ok=dist(QI.D5,d5).map((x,i)=>[x,i]).filter(x=>x[0].length===d5.length&&x[1]!==5).map(x=>QI.D5.o[x[1]][0]);
-    F.push([ok.length?"good":"warn","Public proof points",ok.length?`Everyone agreed we can announce: <b>${ok.map(esc).join(", ")}</b>.`:"No proof point is approved by everyone yet. Confirm before any campaign uses one."])}
-  // Disagreements
-  const split=ALLQ.filter(q=>q.type==="single").map(q=>[q,agreement(q,rows)]).filter(x=>x[1]!=null&&x[1]<.6);
-  if(split.length)F.push(["warn","Where owners disagree",split.map(x=>`${x[0].id} ${esc(x[0].label)}`).join(" · ")+". Settle these in the next meeting."]);
-  // Concerns
-  const e1=pick("E1");if(e1.length)F.push(["info","Main concerns",e1.map(r=>`<b>${esc(first(r.name))}:</b> <span class="ar">${esc(r.answers.E1)}</span>`).join("<br>")]);
+  const F=[];
+  const low=by(rows,"A1",0),high=[...by(rows,"A1",2),...by(rows,"A1",3)];
+  if(low.length&&high.length)F.push(f("warn","Budget views are far apart",`${names(low)} chose 300–400k while ${names(high)} chose above 500k. Present a base plan and a larger plan side by side.`));
+  const disc=by(rows,"A3",2);if(disc.length)F.push(f("warn","6-month commitment needs a conversation",`Want to discuss it: ${names(disc)}. Prepare what is delivered in each of the six months.`));
+  else if(answered(rows,"A3").length)F.push(f("good","6-month commitment accepted",`Everyone who answered accepts it${by(rows,"A3",1).length?`; ${names(by(rows,"A3",1))} would commit to the full year`:""}.`));
+  const one=by(rows,"B2",0),three=by(rows,"B2",1);
+  if(one.length)F.push(f("bad","Expect results within a month",`Chose within 1 month: ${names(one)}. Agree early signs of progress for months 1–3 before the plan starts, or the first month will feel like a failure.`));
+  else if(three.length)F.push(f("warn","Expect results within 3 months",`Chose within 3 months: ${names(three)}. Show clear early indicators in the first monthly report.`));
+  const none=by(rows,"B4",4);if(none.length)F.push(f("bad","No baseline today",`Said nothing is tracked: ${names(none)}. Set up basic tracking (policies, inquiries, where customers heard about Al-Masar) in month 1, or results can't be proven.`));
+  const micro=by(rows,"C1",0),slow=by(rows,"C3",2);
+  if(micro.length)F.push(f("warn","Want to approve every post and ad",`Chose this: ${names(micro)}.${slow.length?` Approvals may take up to a week, according to ${names(slow)}.`:""} Propose a monthly content calendar approved in one sitting.`));
+  else if(slow.length)F.push(f("warn","Slow approvals",`Approvals may take up to a week, according to ${names(slow)}. Build that into the content schedule.`));
+  const noStaff=by(rows,"C5",0),noHire=by(rows,"C6",1);
+  if(noStaff.length)F.push(f(noHire.length?"warn":"info","No marketing staff in-house",`According to ${names(noStaff)}.${noHire.length?` No plan to hire, according to ${names(noHire)}, so plan for more hands-on work from our side.`:" Helping them hire and train is a selling point."}`));
+  const d2=answered(rows,"D2");if(d2.length>1){const ag=agreement(QI.D2,rows),t=topOpt(QI.D2,d2);F.push(f(ag===1?"good":"warn","Main focus",t.tie?`Owners are split (${Math.round(ag*100)}% agreement). Settle this before the message is written.`:`<b>${esc(QI.D2.o[t.i][0])}</b>${ag===1?", everyone agrees.":` is most chosen, but not by everyone (${Math.round(ag*100)}% agreement).`}`))}
+  const d5=answered(rows,"D5");if(d5.length){const ok=dist(QI.D5,d5).map((x,i)=>[x,i]).filter(x=>x[0].length===d5.length&&x[1]!==5).map(x=>esc(QI.D5.o[x[1]][0]));
+    F.push(f(ok.length?"good":"warn","What we can say publicly",ok.length?`Everyone approved: <b>${ok.join(", ")}</b>. Anything else needs sign-off before a campaign uses it.`:"No claim is approved by everyone yet. Confirm before any campaign uses one."))}
+  const e1=answered(rows,"E1");if(e1.length)F.push(f("info","Their main concerns",e1.map(r=>`<b>${nm(r)}:</b> <span class="ar" dir="rtl">${esc(r.answers.E1)}</span>`).join("<br>")));
   return F;
 }
 
-function qCard(q,rows){
-  const ans=rows.filter(r=>has(q,r.answers));let body="",meta=`${ans.length} of ${rows.length} answered`;
-  if(q.o){const c=dist(q,ans);const mx=Math.max(1,...c.map(x=>x.length));const top=Math.max(...c.map(x=>x.length));
-    body=c.map((x,i)=>`<div class="row ${x.length&&x.length===top?"top":""}"><div class="lbl">${txt(q.o[i])}</div><div class="track"><div class="fill" style="width:${x.length/mx*100}%"></div></div><div class="n">${x.length}</div>${x.length?`<div class="who">${x.map(r=>esc(first(r.name))).join(", ")}</div>`:""}</div>`).join("");
-    const ag=agreement(q,rows);if(ag!=null)meta+=` <span class="agree" title="How much the answers agree">Agreement <i><b style="width:${Math.round(ag*100)}%"></b></i> ${Math.round(ag*100)}%</span>`;
-    if(q.comment){const cm=rows.filter(r=>r.answers[q.id+"_c"]);if(cm.length)body+=`<div class="texts" style="margin-top:8px">`+cm.map(r=>`<div class="tx"><div class="by">${esc(r.name)}</div><div class="t ar">${esc(r.answers[q.id+"_c"])}</div></div>`).join("")+`</div>`}
-  }else{body=ans.length?`<div class="texts">`+ans.map(r=>`<div class="tx"><div class="by">${esc(r.name)}${r.role?" · "+esc(r.role):""}</div><div class="t ar">${esc(r.answers[q.id])}</div></div>`).join("")+`</div>`:`<div class="empty">No answers yet</div>`}
-  return `<div class="card qc"><h3><span class="qid">${q.id}</span>${txt(q.t)}</h3><div class="meta">${meta}</div>${body}</div>`;
+/* ---------- agreement map ---------- */
+function agreeMap(rows){
+  const list=ALLQ.filter(q=>q.o).map(q=>[q,agreement(q,rows)]).filter(x=>x[1]!=null).sort((a,b)=>a[1]-b[1]);
+  if(!list.length)return `<div class="panel empty">Agreement appears once two or more people answer.</div>`;
+  return `<div class="panel"><div class="agree-list">${list.map(([q,a])=>`<button class="ag lv-${lvl(a)}" type="button" data-jump="${q.id}"><span class="id">${q.id}</span><span class="lbl">${esc(q.label)}</span><span class="tr"><i data-w="${Math.round(a*100)}"></i></span><span class="pc num">${Math.round(a*100)}%</span></button>`).join("")}</div></div>`;
 }
 
+/* ---------- question cards ---------- */
+function qCard(q,rows){
+  const ans=rows.filter(r=>has(q,r.answers));let body="",meta=`<span>${ans.length} of ${rows.length} answered</span>`;
+  if(q.o){const c=dist(q,ans);const mx=Math.max(1,...c.map(x=>x.length));const top=Math.max(...c.map(x=>x.length));
+    body=c.map((x,i)=>`<div class="opt ${x.length&&x.length===top?"top":""}"><div class="lbl">${tx(q.o[i])}</div><div class="tr"><i data-w="${x.length/mx*100}"></i></div><div class="n num">${x.length}</div>${x.length?`<div class="whos">${x.map(r=>av(r,1)).join("")}</div>`:""}</div>`).join("");
+    const ag=agreement(q,rows);if(ag!=null)meta+=`<span class="pill ${lvl(ag)}">${Math.round(ag*100)}% agree</span>`;
+    if(q.comment){const cm=rows.filter(r=>r.answers[q.id+"_c"]);if(cm.length)body+=`<div class="texts" style="margin-top:12px">`+cm.map(r=>`<div class="tx">${av(r,1)}<div><div class="by">${nm(r)}</div><div class="t ar" dir="auto">${esc(r.answers[q.id+"_c"])}</div></div></div>`).join("")+`</div>`}
+  }else body=ans.length?`<div class="texts">`+ans.map(r=>`<div class="tx">${av(r,1)}<div><div class="by">${nm(r)}${r.role?" · "+esc(r.role):""}</div><div class="t ar" dir="auto">${esc(r.answers[q.id])}</div></div></div>`).join("")+`</div>`:`<div class="empty">No answers yet</div>`;
+  return `<div class="panel qc" id="q-${q.id}"><h4><span class="qid">${q.id}</span>${tx(q.t)}</h4><div class="meta">${meta}</div>${body}</div>`;
+}
+
+/* ---------- compare matrix ---------- */
+function compare(rows){
+  let h=`<p class="legend"><span><i style="background:var(--warn-bg);outline:1px solid #F1D08A"></i>Differs from the most common answer</span><span>Click a name to open that person</span></p><div class="mx-wrap"><table class="mx"><thead><tr><th>Question</th>${rows.map(r=>`<th><button type="button" class="ph" data-person="${esc(r.id)}" style="border:0;background:none;cursor:pointer;padding:0;font-weight:800">${av(r,1)}<span>${nm(r)}</span></button></th>`).join("")}</tr></thead><tbody>`;
+  SV.sections.forEach(s=>{h+=`<tr class="sec"><th colspan="${rows.length+1}">${tx(s.t)}</th></tr>`;
+    s.q.forEach(q=>{const t=q.type==="single"?topOpt(q,answered(rows,q.id)):null;
+      h+=`<tr><th><span class="id">${q.id}</span>${esc(q.label)}</th>`+rows.map(r=>{const a=ansText(q,r.answers,L);const diff=t&&!t.tie&&t.i>=0&&r.answers[q.id]!=null&&r.answers[q.id]!==t.i&&answered(rows,q.id).length>1;
+        return `<td class="${a?"":"none"} ${diff?"diff":""}"><div class="t ${L||!q.o?"ar":""}" dir="auto">${esc(a||"No answer")}</div></td>`}).join("")+`</tr>`})});
+  return h+`</tbody></table></div>`;
+}
+
+/* ---------- person ---------- */
 function personView(rows){
   if(!person||!rows.find(r=>r.id===person))person=rows[0]&&rows[0].id;
   const p=rows.find(r=>r.id===person);if(!p)return "";
-  const n=ALLQ.filter(q=>has(q,p.answers)).length;
-  const fl=findings([p]).filter(f=>f[0]!=="info");
-  let h=`<div class="card"><div class="person-pick"><label for="pp" style="font-weight:700">Person</label><select id="pp">${rows.map(r=>`<option value="${esc(r.id)}" ${r.id===person?"selected":""}>${esc(r.name)}${r.role?" · "+esc(r.role):""}</option>`).join("")}</select>
-   <span style="color:var(--muted)">Answered ${n} of ${ALLQ.length} · received ${esc(String(p.receivedAt||"").slice(0,16).replace("T"," "))}</span></div></div>`;
-  if(fl.length)h+=`<div class="card"><h2>Flags for ${esc(first(p.name))}</h2><div class="find">${fl.map(f=>`<div class="f ${f[0]}"><span class="tag">${esc(f[1])}</span><div>${f[2]}</div></div>`).join("")}</div></div>`;
-  SV.sections.forEach(s=>{h+=`<div class="card"><h2>${s.k}. ${txt(s.t)}</h2>`+s.q.map(q=>{const a=ansText(q,p.answers,L);return `<div class="ans"><div class="q"><b>${q.id}</b> ${txt(q.t)}</div><div class="a ${a?"":"none"} ${L||q.type==="text"||q.type==="short"?"ar":""}">${esc(a||"No answer")}</div></div>`}).join("")+`</div>`});
-  return h;
+  const n=ALLQ.filter(q=>has(q,p.answers)).length,C=2*Math.PI*34;
+  const fl=findings([p]).filter(x=>(x.lv==="bad"||x.lv==="warn")&&x.t!=="Main focus");
+  const recv=new Date(p.receivedAt);
+  let h=`<div class="pp no-print" role="group" aria-label="Choose a person">${rows.map(r=>`<button type="button" data-person="${esc(r.id)}" aria-pressed="${r.id===person}">${av(r)}<span>${nm(r)}</span></button>`).join("")}</div>
+  <div class="stack reveal"><div class="panel"><div class="phead"><div class="ring"><svg viewBox="0 0 84 84" aria-hidden="true"><circle cx="42" cy="42" r="34" fill="none" stroke="#E3E5EE" stroke-width="8"/><circle class="f2" cx="42" cy="42" r="34" fill="none" stroke="#EAA918" stroke-width="8" stroke-linecap="round" stroke-dasharray="${C}" stroke-dashoffset="${C}" data-to="${C*(1-n/ALLQ.length)}"/></svg><b class="num">${n}</b></div>
+    <div><div style="font-size:26px;font-weight:900;line-height:1.2">${nm(p)}</div><div class="mini">${esc(p.role||"Role not given")} · answered ${n} of ${ALLQ.length} · ${isNaN(recv)?"":esc(recv.toLocaleString("en-GB",{day:"numeric",month:"short",hour:"2-digit",minute:"2-digit"}))} · filled in ${p.lang==="en"?"English":"Arabic"}</div></div></div></div>`;
+  if(fl.length)h+=`<div>${fHTML(fl)}</div>`;
+  SV.sections.forEach(s=>{h+=`<div class="panel"><h3 style="margin-bottom:6px">${tx(s.t)}</h3>`+s.q.map(q=>{const a=ansText(q,p.answers,L);const t=q.type==="single"?topOpt(q,answered(rows,q.id)):null;const diff=rows.length>1&&t&&!t.tie&&t.i>=0&&p.answers[q.id]!=null&&p.answers[q.id]!==t.i;
+    return `<div class="ans"><div class="q"><b>${q.id}</b>${tx(q.t)}</div><div class="a ${a?"":"none"} ${L||!q.o?"ar":""}" dir="auto">${esc(a||"No answer")}${diff?`<span class="tagm">differs from others</span>`:""}</div></div>`}).join("")+`</div>`});
+  return h+`</div>`;
 }
 
+/* ---------- render ---------- */
 function render(){
   const m=$("#main");
-  if(R===null){m.innerHTML=connectView();$("#go").onclick=()=>{conn.endpoint=$("#ep").value.trim();conn.key=$("#ky").value.trim();try{localStorage.setItem(LS,JSON.stringify(conn))}catch(e){};load()};return}
-  const rows=R;const N=rows.length;
-  let h=demo?`<div class="demo">Demo data: these three respondents are made up to preview the dashboard. Open the page without ?demo=1 to see real answers.</div>`:"";
-  const avg=N?Math.round(rows.reduce((s,r)=>s+ALLQ.filter(q=>has(q,r.answers)).length,0)/N/ALLQ.length*100):0;
-  const last=N?String(rows.map(r=>r.receivedAt).sort().pop()).slice(0,16).replace("T"," "):"—";
-  h+=`<div class="tiles"><div class="tile"><div class="k">Respondents</div><div class="v">${N}</div></div><div class="tile"><div class="k">Avg. completion</div><div class="v">${avg}%</div></div><div class="tile"><div class="k">Last answer</div><div class="v" style="font-size:18px">${esc(last)}</div></div><div class="tile"><div class="k">Questions</div><div class="v">${ALLQ.length}</div></div></div>`;
-  if(!N){m.innerHTML=h+`<div class="card empty">No answers yet. Share the survey link and refresh this page later.</div>`;return}
-  h+=`<div class="tabs no-print" role="tablist"><button class="btn" role="tab" aria-selected="${view==="all"}" data-v="all">All owners combined</button><button class="btn" role="tab" aria-selected="${view==="one"}" data-v="one">Each person</button></div>`;
-  if(view==="all"){
-    const F=findings(rows);
-    h+=`<div class="card"><h2>Key findings</h2><div class="find">${F.map(f=>`<div class="f ${f[0]}"><span class="tag">${esc(f[1])}</span><div>${f[2]}</div></div>`).join("")||'<div class="empty">Not enough answers yet.</div>'}</div></div>`;
-    SV.sections.forEach(s=>{h+=`<h2 class="sec-t">${txt(s.t)}</h2><div class="qgrid">${s.q.map(q=>qCard(q,rows)).join("")}</div>`});
-  }else h+=personView(rows);
-  m.innerHTML=h;
-  m.querySelectorAll("[data-v]").forEach(b=>b.onclick=()=>{view=b.dataset.v;render()});
-  const pp=$("#pp");if(pp)pp.onchange=()=>{person=pp.value;render()};
+  $("#l_en").setAttribute("aria-pressed",L?"false":"true");$("#l_ar").setAttribute("aria-pressed",L?"true":"false");
+  if(R===null||R===undefined){m.innerHTML=connectView();$("#go").onclick=()=>{const ep=$("#ep");if(ep)conn.endpoint=ep.value.trim();conn.key=$("#ky").value.trim();try{localStorage.setItem(LS,JSON.stringify(conn))}catch(e){};R=undefined;load()};
+    $("#ky").addEventListener("keydown",e=>{if(e.key==="Enter")$("#go").click()});return}
+  const rows=R;let h=`<div class="reveal">`+hero(rows)+`</div>`;
+  if(!rows.length){m.innerHTML=h;go();return}
+  const tabs=[["plan","Plan inputs"],["questions","Every question"],["compare","Side by side"],["person","Each person"]];
+  h+=`<div class="tabs no-print" role="tablist">${tabs.map(t=>`<button role="tab" type="button" aria-selected="${view===t[0]}" data-v="${t[0]}">${t[1]}</button>`).join("")}</div><div id="body">`;
+  if(view==="plan"){
+    h+=`<div class="three reveal">${costPanel(rows)}${timePanel(rows)}${workPanel(rows)}</div>
+      <h2 class="h2">What to act on</h2><p class="sub">Flags drawn from the answers, most urgent first.</p><div class="reveal">${fHTML(sortF(findings(rows)))}</div>
+      <h2 class="h2">Where they agree and disagree</h2><p class="sub">Lowest agreement first. Click a row to open that question.</p><div class="reveal">${agreeMap(rows)}</div>`;
+  }else if(view==="questions"){
+    SV.sections.forEach(s=>{h+=`<div class="sec-h"><h2>${tx(s.t)}</h2><span>${s.q.length} questions</span></div><div class="qgrid reveal">${s.q.map(q=>qCard(q,rows)).join("")}</div>`});
+  }else if(view==="compare")h+=`<div class="reveal">${compare(rows)}</div>`;
+  else h+=personView(rows);
+  m.innerHTML=h+`</div>`;wireBody();go();
+}
+function sortF(F){const o={bad:0,warn:1,good:2,info:3};return F.slice().sort((a,b)=>o[a.lv]-o[b.lv])}
+function wireBody(){
+  document.querySelectorAll("[data-v]").forEach(b=>b.onclick=()=>{view=b.dataset.v;keep();render();window.scrollTo({top:$(".tabs").offsetTop-80,behavior:RM?"auto":"smooth"})});
+  document.querySelectorAll("[data-person]").forEach(b=>b.onclick=()=>{person=b.dataset.person;view="person";keep();render()});
+  document.querySelectorAll("[data-jump]").forEach(b=>b.onclick=()=>{view="questions";keep();render();const el=$("#q-"+b.dataset.jump);if(el){el.scrollIntoView({behavior:RM?"auto":"smooth",block:"start"});el.classList.add("flash");setTimeout(()=>el.classList.remove("flash"),1600)}});
+}
+// animate: bars grow, numbers count up, ring fills
+function go(){
+  requestAnimationFrame(()=>requestAnimationFrame(()=>{
+    $("#main").classList.add("go");
+    document.querySelectorAll("[data-w]").forEach(i=>i.style.width=i.dataset.w+"%");
+    document.querySelectorAll(".ring circle.f2").forEach(c=>c.style.strokeDashoffset=c.dataset.to);
+    document.querySelectorAll("[data-count]").forEach(el=>{const to=+el.dataset.count;if(RM||!to){el.textContent=to;return}
+      const t0=performance.now(),d=900;const step=t=>{const k=Math.min(1,(t-t0)/d),e=1-Math.pow(1-k,3);el.textContent=Math.round(to*e);if(k<1)requestAnimationFrame(step)};requestAnimationFrame(step)});
+  }));
 }
 
+/* ---------- export ---------- */
 function download(name,text,type){const b=new Blob([text],{type});const a=document.createElement("a");a.href=URL.createObjectURL(b);a.download=name;document.body.appendChild(a);a.click();setTimeout(()=>{URL.revokeObjectURL(a.href);a.remove()},500)}
-$("#csv").onclick=()=>{if(!R||!R.length)return;const head=["Name","Role","Received",...ALLQ.map(q=>q.id+" "+q.label)];
-  const lines=[head,...R.map(r=>[r.name,r.role,r.receivedAt,...ALLQ.map(q=>ansText(q,r.answers,0))])].map(row=>row.map(c=>'"'+String(c==null?"":c).replace(/"/g,'""')+'"').join(","));
-  download("almasar-survey-answers.csv","﻿"+lines.join("\r\n"),"text/csv;charset=utf-8")};
-$("#json").onclick=()=>{if(!R)return;download("almasar-survey-answers.json",JSON.stringify({questions:SV,responses:R},null,2),"application/json")};
-$("#prt").onclick=()=>window.print();
-$("#refresh").onclick=load;
-$("#langBtn").onclick=()=>{L=L?0:1;$("#langBtn").textContent=L?"Show answers in English":"Show answers in Arabic";$("#langBtn").classList.toggle("on",!!L);render()};
+const closeMenu=()=>{$("#menu").hidden=true;$("#exportBtn").setAttribute("aria-expanded","false")};
+$("#exportBtn").onclick=e=>{e.stopPropagation();const m=$("#menu");m.hidden=!m.hidden;$("#exportBtn").setAttribute("aria-expanded",String(!m.hidden))};
+document.addEventListener("click",e=>{if(!$("#menu").hidden&&!$("#menu").contains(e.target))closeMenu()});
+document.addEventListener("keydown",e=>{if(e.key==="Escape")closeMenu()});
+$("#csv").onclick=()=>{closeMenu();if(!R||!R.length)return;const head=["Name","Role","Received","Language",...ALLQ.map(q=>q.id+" "+q.label)];
+  const lines=[head,...R.map(r=>[r.name,r.role,r.receivedAt,r.lang,...ALLQ.map(q=>ansText(q,r.answers,L))])].map(row=>row.map(c=>'"'+String(c==null?"":c).replace(/"/g,'""')+'"').join(","));
+  download("almasar-owners-answers.csv","﻿"+lines.join("\r\n"),"text/csv;charset=utf-8")};
+$("#json").onclick=()=>{closeMenu();if(!R)return;download("almasar-owners-answers.json",JSON.stringify({questions:SV,responses:R},null,2),"application/json")};
+$("#prt").onclick=()=>{closeMenu();setTimeout(()=>window.print(),60)};
+$("#disc").onclick=()=>{closeMenu();conn={};try{localStorage.removeItem(LS)}catch(e){};R=null;render()};
+$("#refresh").onclick=()=>{if(demo){render();return}load()};
+$("#l_en").onclick=()=>{L=0;keep();render()};$("#l_ar").onclick=()=>{L=1;keep();render()};
 window.addEventListener("hashchange",()=>{if(location.hash.includes("key="))location.reload()});
 load();
 })();
