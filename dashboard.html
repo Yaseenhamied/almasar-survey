@@ -216,9 +216,57 @@ table.mx{border-collapse:separate;border-spacing:0;width:100%;min-width:720px;fo
 .loading path{stroke-dasharray:1;stroke-dashoffset:1;animation:dashloop 1.6s var(--ease-io) infinite}
 @keyframes dashloop{0%{stroke-dashoffset:1}60%{stroke-dashoffset:0}100%{stroke-dashoffset:-1}}
 
+
+/* v3 additions: rankings, targets, scorecard, readiness, capacity */
+.two{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.blk{margin-top:16px;padding-top:14px;border-top:1px solid var(--sep)}
+.blk:first-of-type{margin-top:8px}
+.blk h5{margin:0 0 8px;font-size:14.5px;color:var(--ink2);font-weight:800}
+.rk-row{display:grid;grid-template-columns:22px minmax(0,1.3fr) minmax(0,1fr) 40px;gap:10px;align-items:center;padding:5px 0}
+.rk-row .pos{font-weight:900;color:var(--gold-ink)}
+.rk-row .lbl{font-size:14.5px;line-height:1.35}
+.rk-row:first-child .lbl{font-weight:800}
+.rk-row .tr{height:12px;background:var(--soft);border-radius:6px;overflow:hidden}
+.rk-row .tr i{display:block;height:100%;width:0;background:var(--navy);border-radius:6px;transition:width .9s var(--ease-expo)}
+.rk-row:first-child .tr i{background:var(--gold)}
+.rk-row .n{text-align:end;font-weight:800;color:var(--navy);font-size:14px}
+.firsts{display:flex;gap:6px;flex-wrap:wrap;margin-top:6px;font-size:13.5px;color:var(--ink3);align-items:center}
+.nums{display:grid;gap:6px}
+.nr{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:10px;align-items:center}
+.nr .tr{height:12px;background:var(--soft);border-radius:6px;overflow:hidden}
+.nr .tr i{display:block;height:100%;width:0;border-radius:6px;transition:width .9s var(--ease-expo)}
+.nr .v{font-weight:800;font-size:14.5px;text-align:end;min-width:7ch}
+.nstat{display:flex;gap:16px;flex-wrap:wrap;font-size:13.5px;color:var(--ink2);margin-top:8px}
+.nstat b{color:var(--ink);font-size:15px}
+.sc{display:grid;gap:4px}
+.sc-r{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.5fr) 44px;gap:12px;align-items:center;padding:6px 0;border-bottom:1px solid var(--sep)}
+.sc-r:last-child{border-bottom:0}
+.sc-r .lbl{font-size:14.5px;font-weight:700}
+.sc-t{position:relative;height:30px;margin-inline:14px}
+.sc-t .ln{position:absolute;inset-inline:0;top:14px;height:3px;background:var(--sel);border-radius:2px}
+.sc-t .tk{position:absolute;top:10px;width:2px;height:11px;background:#D3D7E6;margin-inline-start:-1px}
+.sc-t .avgm{position:absolute;z-index:3;box-shadow:0 0 0 2px #fff;top:6px;width:6px;height:19px;border-radius:3px;background:var(--gold);margin-inline-start:-3px;opacity:0;transition:opacity .5s ease .4s}
+.go .sc-t .avgm{opacity:1}
+.sc-t .pd{position:absolute;top:2px;margin-inline-start:-13px}
+.sc-r .avg{font-weight:900;text-align:end;color:var(--navy)}
+.sc-head{border-bottom:0!important;padding:0!important}.sc-head .sc-t{height:18px}.tl2{position:absolute;top:0;transform:translateX(-50%);font-size:12.5px;color:var(--ink3);font-weight:700}
+.sc-key2{display:flex;justify-content:space-between;font-size:12.5px;color:var(--ink3);margin:2px 0 6px;padding-inline-start:calc(40% + 12px);padding-inline-end:50px}
+.ready{display:flex;gap:18px;align-items:center}
+.ready .ring{width:96px;height:96px}
+.ready .ring b{font-size:24px}
+.comp{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr) 40px;gap:10px;align-items:center;padding:4px 0;font-size:14.5px}
+.comp .tr{height:10px;background:var(--soft);border-radius:6px;overflow:hidden}
+.comp .tr i{display:block;height:100%;width:0;border-radius:6px;transition:width .9s var(--ease-expo)}
+.comp .n{text-align:end;font-weight:800}
+.note{font-size:13px;color:var(--ink3);margin-top:10px}
+.chips{display:flex;gap:6px;flex-wrap:wrap}
+.chip{background:var(--sel);color:var(--navy);border-radius:999px;padding:3px 12px;font-size:13.5px;font-weight:700}
+.chip b{font-weight:900}
+@media (max-width:1000px){.two{grid-template-columns:1fr}}
+@media (max-width:640px){.sc-r{grid-template-columns:1fr 40px}.sc-r .sc-t{grid-column:1/-1;grid-row:2}.sc-key2{padding:0 40px 0 0}}
 @media (max-width:1000px){.three{grid-template-columns:1fr}.qgrid{grid-template-columns:1fr}.stats{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media (max-width:640px){
-  .appbar-in{padding-inline:12px;gap:6px}.appbar .ttl{display:none}.appbar img{height:28px}
+  .appbar-in{padding-inline:12px;gap:6px}.appbar .ttl{display:none}.appbar img{height:30px}.seg button{padding:0 11px}.iconbtn{min-width:40px}
   main{padding:14px 14px 70px}.stage{padding:24px 20px 22px;border-radius:22px}
   .ag{grid-template-columns:36px minmax(0,1fr) 46px}.ag .tr{grid-column:2/4;grid-row:2}
   .ans{grid-template-columns:1fr}.opt{grid-template-columns:minmax(0,1fr) 90px 24px}
@@ -236,7 +284,7 @@ table.mx{border-collapse:separate;border-spacing:0;width:100%;min-width:720px;fo
 <body>
 <header class="appbar">
   <div class="appbar-in">
-    <img src="assets/horiz.png" alt="Al-Masar Insurance">
+    <picture><source media="(max-width:640px)" srcset="assets/symbol.png"><img src="assets/horiz.png" alt="Al-Masar Insurance"></picture>
     <div class="ttl">Owners' answers<small>Private consultant view</small></div>
     <div class="sp"></div>
     <div class="seg no-print" role="group" aria-label="Answer language">
@@ -269,17 +317,30 @@ const hp=new URLSearchParams(location.hash.slice(1));
 if(hp.get("key")){conn.key=hp.get("key");try{localStorage.setItem(LS,JSON.stringify(conn))}catch(e){};history.replaceState(null,"",location.pathname+location.search)}
 const demo=new URLSearchParams(location.search).get("demo")==="1";
 let saved={};try{saved=JSON.parse(localStorage.getItem(LSV)||"{}")||{}}catch(e){}
-let R=undefined,L=saved.L===1?1:0,view=saved.view||"plan",person=null,err="";
+let R=undefined,OLD=[],L=saved.L===1?1:0,view=saved.view||"plan",person=null,err="";
 const $=(s,r=document)=>r.querySelector(s);
 const esc=s=>String(s==null?"":s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
 const tx=a=>`<span class="${L?"ar":""}" ${L?'lang="ar" dir="rtl"':""}>${esc(a[L])}</span>`;
 const endpoint=()=>conn.endpoint||CFG.endpoint||"";
 const keep=()=>{try{localStorage.setItem(LSV,JSON.stringify({L,view}))}catch(e){}};
 
+/* made-up respondents for ?demo=1 only */
 const DEMO=[
- {id:"d1",name:"Demo owner A",role:"Chairman",lang:"ar",receivedAt:"2026-11-02T10:12:00Z",answers:{A1:1,A2:0,A3:0,A4:[0,1],B1:[1,3,2],B2:1,B3:2,B4:[0,1],B5:"أن نكون ضمن أول 10 شركات في طرابلس",C1:1,C2:"أحمد – مدير المبيعات",C3:1,C4:[0,2],C5:0,C6:0,D1:[0,2],D2:2,D3:"سرعة الإصدار والتعامل المحترم",D4:"العالمية، لأن حضورها قوي",D5:[0,2],D6:"3 مكاتب و8 موظفين",E1:"أن ندفع دون أن نرى نتائج واضحة",E2:""}},
- {id:"d2",name:"Demo owner B",role:"Board member",lang:"ar",receivedAt:"2026-11-02T12:40:00Z",answers:{A1:0,A2:2,A3:2,A4:[0,2],B1:[0,1],B2:0,B3:2,B4:[4],B5:"زيادة المبيعات",C1:0,C2:"",C3:2,C4:[2],C5:0,C6:2,D1:[0,1],D2:1,D3:"",D4:"البركة",D5:[0],D6:"",E1:"التكلفة",E2:"نريد أن نبدأ بالمركبات"}},
- {id:"d3",name:"Demo owner C",role:"General Manager",lang:"ar",receivedAt:"2026-11-03T09:05:00Z",answers:{A1:1,A2:0,A3:0,A4:[1,2],B1:[1,2,5],B2:2,B3:2,B4:[0,1,2],B5:"عملاء مؤسسيون أكثر وثقة أكبر في السوق",C1:1,C2:"سارة – العلاقات العامة",C3:1,C4:[0,1],C5:1,C6:0,D1:[2,0],D2:0,D3:"خدمة سريعة ومتابعة شخصية",D4:"المتحدة بسبب علاقاتها مع الشركات",D5:[0,1,3],D5_c:"تسوية خلال 15 يوم عمل للمركبات",D6:"3 مكاتب، 9 مندوبين",E1:"ألا يفهم الفريق طبيعة سوق التأمين",E2:""}}
+ {id:"d1",name:"Demo owner A",role:"Chairman",lang:"ar",version:SV.version,receivedAt:"2026-11-02T10:12:00Z",answers:{A1:[0,2,4,3],A2:4000000,A3:15000000,A4:12,A5:0,A6:[2,4],A7:"شركة تأمين نثق بها وتدفع المطالبات بسرعة",
+  B1:1,B2:[0,1,2,5,6],B3:0,B4:0,B5:0,B6:[0,1],C1:[1,2,3],C2:1,C3:2,C4:60,C5:[0,1],C6:1,C7:0,
+  D1:[0,2,1,5,3,4],D2:2,D3:2,D4:[1,0,2],D5:[0,2],D6:1,D7:1,D8:2,D9:1,E1:0,E2:1,E3:[0,1],E4:[4],E5:[0,2],E6:{0:3,1:5,2:3,3:2,4:4,5:2},
+  F1:3,F2:8,F3:6,F4:2,F5:[0,1,2],F6:[1,2],F7:1,F8:0,F9:0,G1:0,G1_c:"حضورها قوي وعندها وكلاء في كل مكان",G2:[0,1],G3:"سرعة الإصدار والتعامل المحترم",
+  H1:1,H2:1,H3:"أحمد – مدير المبيعات",H4:[0,2],H5:0,H6:0,H7:[0,3],H8:"لا نذكر أسماء المنافسين",I1:"افتتاح مكتب مصراتة في يناير",I2:"أن ندفع دون أن نرى نتائج واضحة",I3:""}},
+ {id:"d2",name:"Demo owner B",role:"Board member",lang:"ar",version:SV.version,receivedAt:"2026-11-02T12:40:00Z",answers:{A1:[1,2,0],A2:2000000,A3:"dk",A4:"dk",A5:1,A6:[0,2],A7:"",
+  B1:0,B2:[0,1,2],B3:2,B4:2,B5:2,B6:[0,2],C1:[0,1],C2:0,C3:2,C4:40,C5:[4],C6:3,C7:3,
+  D1:[0,1,2],D2:1,D3:3,D4:[8,6],D5:[0],D6:2,D7:3,D8:3,D9:3,E1:0,E2:3,E3:[4],E4:[5],E5:[0],E6:{0:4,1:4,2:2,3:1,4:3,5:2},
+  F1:3,F2:9,F3:2,F4:2,F5:[1,5],F6:[3],F7:1,F8:0,F9:2,G1:1,G2:[0,3],G3:"",
+  H1:0,H2:2,H3:"",H4:[2],H5:3,H5_c:"Almasar Insurance",H6:2,H7:[5],H8:"",I1:"",I2:"التكلفة",I3:"نريد أن نبدأ بالمركبات"}},
+ {id:"d3",name:"Demo owner C",role:"General Manager",lang:"ar",version:SV.version,receivedAt:"2026-11-03T09:05:00Z",answers:{A1:[0,4,2,3,1,5],A2:5000000,A3:20000000,A4:15,A5:0,A6:[1,2],A7:"الخيار الأول للشركات في طرابلس",
+  B1:1,B2:[0,1,3,5,7],B3:0,B4:1,B5:0,B6:[1,2],C1:[1,2,5],C2:2,C3:2,C4:70,C5:[0,1,2],C6:1,C7:1,
+  D1:[2,0,5,1,3,4],D2:0,D3:1,D4:[0,1,3],D5:[0,1,2],D6:3,D7:1,D8:2,D9:1,E1:1,E2:2,E3:[0,1,2],E4:[1,4],E5:[0,1,3],E5_c:"تسوية خلال 30 يوماً للمركبات",E6:{0:3,1:5,2:3,3:2,4:4,5:3},
+  F1:3,F2:9,F3:5,F4:2,F5:[0,2,4],F6:[0,1],F7:0,F8:1,F9:0,G1:2,G1_c:"علاقاتها مع الشركات الكبيرة",G2:[1,3,4],G3:"خدمة سريعة ومتابعة شخصية",
+  H1:1,H2:1,H3:"سارة – العلاقات العامة",H4:[0,1],H5:0,H6:0,H7:[1,2],H8:"لا وعود بمدة تسوية قبل اعتمادها",I1:"إطلاق التأمين الطبي للشركات في مارس",I2:"ألا يفهم الفريق طبيعة سوق التأمين",I3:""}}
 ];
 
 /* ---------- helpers ---------- */
@@ -289,30 +350,46 @@ let PC={};
 const av=(r,sm)=>`<span class="av ${sm?"sm":""}" style="background:${PC[r.id]||COLORS[0]}" title="${esc(r.name)}${r.role?" · "+esc(r.role):""}" aria-label="${esc(r.name)}">${esc(initials(r.name))}</span>`;
 const nm=r=>esc(String(r.name||"?").trim());
 const names=a=>a.map(nm).join(", ");
+const fmtN=n=>typeof n==="number"?n.toLocaleString("en-US"):"";
+const fmtM=n=>n>=1e6?(Math.round(n/1e5)/10).toLocaleString("en-US")+"M":n>=1e3?Math.round(n/1e3).toLocaleString("en-US")+"k":String(n);
 function ansText(q,a,lang){const v=a[q.id];let s="";
   if(q.type==="single")s=v!=null&&q.o[v]?q.o[v][lang]:"";
   else if(q.type==="multi")s=Array.isArray(v)?v.map(i=>q.o[i]&&q.o[i][lang]).filter(Boolean).join(lang?"، ":", "):"";
+  else if(q.type==="rank")s=Array.isArray(v)?v.map((i,k)=>(k+1)+". "+(q.o[i]?q.o[i][lang]:"")).join(lang?"، ":", "):"";
+  else if(q.type==="number")s=v==="dk"?(lang?"لا أعرف":"Don't know"):typeof v==="number"?fmtN(v)+(q.unit?" "+q.unit[lang]:""):"";
+  else if(q.type==="scale")s=v&&typeof v==="object"?q.items.map((it,i)=>v[i]?it[lang]+": "+v[i]:"").filter(Boolean).join(lang?"، ":", "):"";
   else s=v||"";
   if(q.comment&&a[q.id+"_c"])s+=(s?" — ":"")+a[q.id+"_c"];return s}
-const has=(q,a)=>{const v=a[q.id];return q.type==="single"?v!=null:q.type==="multi"?Array.isArray(v)&&v.length>0:!!(v&&String(v).trim())};
+const has=(q,a)=>{const v=a[q.id];if(q.type==="single")return v!=null;if(q.type==="multi"||q.type==="rank")return Array.isArray(v)&&v.length>0;
+  if(q.type==="number")return v==="dk"||typeof v==="number";if(q.type==="scale")return !!(v&&typeof v==="object"&&Object.keys(v).length);return !!(v&&String(v).trim())};
 const by=(rows,id,i)=>rows.filter(r=>{const v=r.answers[id];return Array.isArray(v)?v.includes(i):v===i});
 const answered=(rows,id)=>rows.filter(r=>has(QI[id],r.answers));
+const numVals=(rows,id)=>rows.filter(r=>typeof r.answers[id]==="number").map(r=>[r,r.answers[id]]);
+const median=a=>{const s=a.slice().sort((x,y)=>x-y),m=s.length>>1;return s.length?(s.length%2?s[m]:(s[m-1]+s[m])/2):null};
 function dist(q,rows){const c=q.o.map(()=>[]);rows.forEach(r=>{const v=r.answers[q.id];if(q.type==="single"&&v!=null&&c[v])c[v].push(r);if(q.type==="multi"&&Array.isArray(v))v.forEach(i=>c[i]&&c[i].push(r))});return c}
 function topOpt(q,rows){const c=dist(q,rows);let b=-1,n=0,tie=false;c.forEach((x,i)=>{if(x.length>n){n=x.length;b=i;tie=false}else if(x.length===n&&n>0)tie=true});return {i:b,n,tie,c}}
-function agreement(q,rows){const ans=rows.filter(r=>has(q,r.answers));if(ans.length<2)return null;
+/* rank: priority score 0-100 = points (n - position) summed, divided by the most possible */
+function rankScores(q,rows){const ans=answered(rows,q.id),n=q.o.length;const pts=q.o.map(()=>0),firsts=q.o.map(()=>[]);
+  ans.forEach(r=>r.answers[q.id].forEach((i,k)=>{if(pts[i]!=null){pts[i]+=n-k;if(k===0)firsts[i].push(r)}}));
+  return q.o.map((o,i)=>({i,score:ans.length?Math.round(pts[i]/(n*ans.length)*100):0,firsts:firsts[i]})).sort((a,b)=>b.score-a.score)}
+function scaleStats(q,rows){const ans=answered(rows,q.id);return q.items.map((it,i)=>{const v=ans.filter(r=>r.answers[q.id][i]).map(r=>[r,r.answers[q.id][i]]);
+  const xs=v.map(x=>x[1]);return {i,v,avg:xs.length?xs.reduce((a,b)=>a+b,0)/xs.length:null,range:xs.length?Math.max(...xs)-Math.min(...xs):null}})}
+function agreement(q,rows){if(!q.o&&!q.items)return null;const ans=rows.filter(r=>has(q,r.answers));if(ans.length<2)return null;
   if(q.type==="single"){const c=dist(q,ans);return Math.max(...c.map(x=>x.length))/ans.length}
-  let s=0,n=0;for(let i=0;i<ans.length;i++)for(let j=i+1;j<ans.length;j++){const a=new Set(ans[i].answers[q.id]),b=new Set(ans[j].answers[q.id]);const inter=[...a].filter(x=>b.has(x)).length;const uni=new Set([...a,...b]).size;s+=uni?inter/uni:1;n++}
+  if(q.type==="scale"){const s=scaleStats(q,rows).filter(x=>x.v.length>1);return s.length?s.reduce((a,x)=>a+(1-x.range/4),0)/s.length:null}
+  const set=r=>new Set(q.type==="rank"?r.answers[q.id].slice(0,3):r.answers[q.id]);
+  let s=0,n=0;for(let i=0;i<ans.length;i++)for(let j=i+1;j<ans.length;j++){const a=set(ans[i]),b=set(ans[j]);const inter=[...a].filter(x=>b.has(x)).length;const uni=new Set([...a,...b]).size;s+=uni?inter/uni:1;n++}
   return n?s/n:null}
 const lvl=p=>p>=.75?"good":p>=.5?"warn":"bad";
-const fmtK=n=>n>=1000?(n/1000).toLocaleString("en")+"k":String(n);
 const ICON={good:'<path d="M5 12.5l4.5 4.5L19 7.5"/>',warn:'<path d="M12 8v5M12 16.5v.5"/>',bad:'<path d="M12 7v6M12 16.5v.5"/>',info:'<path d="M12 11v6M12 7.5v.5"/>'};
-const f=(lv,t,d)=>({lv,t,d});
+const f=(lv,t,d,group)=>({lv,t,d,group:!!group});
 const fHTML=F=>`<div class="find">${F.map(x=>`<div class="f ${x.lv}"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${ICON[x.lv]}</svg></span><div><b class="t">${x.t}</b><div class="d">${x.d}</div></div></div>`).join("")}</div>`;
+const ring=(pct,size,txt)=>{const r=size/2-7,C=2*Math.PI*r;return `<div class="ring" style="width:${size}px;height:${size}px"><svg viewBox="0 0 ${size} ${size}" aria-hidden="true"><circle cx="${size/2}" cy="${size/2}" r="${r}" fill="none" stroke="#E3E5EE" stroke-width="9"/><circle class="f2" cx="${size/2}" cy="${size/2}" r="${r}" fill="none" stroke="${pct>=60?"#1F7A4D":pct>=35?"#EAA918":"#B42318"}" stroke-width="9" stroke-linecap="round" stroke-dasharray="${C}" stroke-dashoffset="${C}" data-to="${C*(1-pct/100)}"/></svg><b class="num">${txt}</b></div>`};
 
 /* ---------- loading ---------- */
 async function load(){
   err="";
-  if(demo){R=DEMO;prep();render();return}
+  if(demo){R=DEMO;OLD=[];prep();render();return}
   if(!endpoint()||!conn.key){R=null;render();return}
   if(R===undefined)$("#main").innerHTML=`<div class="loading">${loopSvg()}<div>Loading the owners' answers…</div></div>`;
   $("#refresh").classList.add("spin");
@@ -321,6 +398,8 @@ async function load(){
     const j=await r.json();
     if(!j.ok||!Array.isArray(j.responses)){R=null;err="The key was not accepted. Copy it again from the Dashboard key tab in your Google Sheet.";}
     else{let rows=j.responses.map(x=>({...x,answers:x.answers||{}})).sort((a,b)=>String(a.receivedAt).localeCompare(String(b.receivedAt)));
+      // answers from an earlier question set use different codes, so keep them apart
+      OLD=rows.filter(x=>x.version!==SV.version);rows=rows.filter(x=>x.version===SV.version);
       const byName={};rows.forEach(x=>byName[(x.name||"").trim().toLowerCase()]=x);R=Object.values(byName);prep()}
   }catch(e){R=null;err="Could not reach the answer store. Check the connection and that the web app is deployed with access set to Anyone."}
   $("#refresh").classList.remove("spin");render();
@@ -344,13 +423,13 @@ function connectView(){
 function hero(rows){
   const N=rows.length;
   const avg=N?Math.round(rows.reduce((s,r)=>s+ALLQ.filter(q=>has(q,r.answers)).length,0)/N/ALLQ.length*100):0;
-  const sq=ALLQ.filter(q=>q.o).map(q=>agreement(q,rows)).filter(x=>x!=null);
+  const sq=ALLQ.filter(q=>q.o||q.items).map(q=>agreement(q,rows)).filter(x=>x!=null);
   const agr=sq.length?Math.round(sq.reduce((a,b)=>a+b,0)/sq.length*100):null;
   const last=N?new Date(rows.map(r=>r.receivedAt).sort().pop()):null;
   const lastS=last&&!isNaN(last)?last.toLocaleDateString("en-GB",{day:"numeric",month:"short"}):"—";
   return `<section class="stage"><div class="pat"></div>
     ${demo?`<span class="demo">Demo data. Open the page without ?demo=1 to see real answers.</span>`:""}
-    <div class="hero-top"><div><h1>What the owners told us</h1><p class="lede">${N?`${N} ${N===1?"person has":"people have"} answered. The plan inputs below are read straight from their answers. Check any name against the comparison table before you quote it.`:"No answers yet. Share the survey link, then refresh this page."}</p></div>
+    <div class="hero-top"><div><h1>What the owners told us</h1><p class="lede">${N?`${N} ${N===1?"person has":"people have"} answered. The plan inputs below are read straight from their answers. Check any name against the side-by-side table before you quote it.`:"No answers yet. Share the survey link, then refresh this page."}${OLD.length?` ${OLD.length} answer${OLD.length===1?"":"s"} from the earlier question set ${OLD.length===1?"is":"are"} kept in your Google Sheet but not counted here.`:""}</p></div>
     <div class="people">${rows.map(r=>av(r)).join("")}</div></div>
     <div class="stats">
       <div class="stat"><div class="k">Respondents</div><div class="v num" data-count="${N}">0</div></div>
@@ -360,100 +439,186 @@ function hero(rows){
     </div>${pathLine()}</section>`;
 }
 
-/* ---------- plan inputs: the owners' three questions ---------- */
+/* ---------- the owners' three questions ---------- */
 const BANDS=[[300,400],[400,500],[500,750],[750,1000]];
+function topList(q,rows,k=2){const c=dist(q,answered(rows,q.id)).map((x,i)=>[x.length,i]).filter(x=>x[0]>0).sort((a,b)=>b[0]-a[0]).slice(0,k);return c.length?c.map(x=>esc(q.o[x[1]][0])).join(", "):"—"}
+function single(q,rows){const t=topOpt(q,answered(rows,q.id));return t.i<0?"—":t.tie?"Split":esc(q.o[t.i][0])}
 function costPanel(rows){
-  const a1=answered(rows,"A1");const num=a1.filter(r=>r.answers.A1<4),dep=a1.filter(r=>r.answers.A1===4);
-  let head="No answer yet",sub="";
-  let common=null;
-  if(num.length){const lo=Math.max(...num.map(r=>BANDS[r.answers.A1][0])),hi=Math.min(...num.map(r=>BANDS[r.answers.A1][1]));
-    if(lo<hi){common=[lo,hi];head=`${fmtK(lo*1000)} – ${fmtK(hi*1000)} LYD`;sub="Every owner who gave a range accepts this band";}
-    else{const minHi=Math.min(...num.map(r=>BANDS[r.answers.A1][1]));head=`Up to ${fmtK(minHi*1000)} LYD`;sub="Ranges don't overlap. Use the lowest ceiling for the base plan and show the larger plan as an option.";}
+  const a1=answered(rows,"B1");const num=a1.filter(r=>r.answers.B1<4),dep=a1.filter(r=>r.answers.B1===4);
+  let head="No answer yet",sub="",common=null;
+  if(num.length){const lo=Math.max(...num.map(r=>BANDS[r.answers.B1][0])),hi=Math.min(...num.map(r=>BANDS[r.answers.B1][1]));
+    if(lo<hi){common=[lo,hi];head=`${fmtM(lo*1000)} – ${fmtM(hi*1000)} LYD`;sub="Every owner who gave a range accepts this band";}
+    else{head=`Up to ${fmtM(hi*1000)} LYD`;sub="Ranges don't overlap. Use the lowest ceiling for the base plan and show the larger plan as an option.";}
   }else if(dep.length){head="Waiting for our proposal";sub="All who answered said it depends on the plan"}
   const pos=v=>(v-300)/700*100;
-  const lanes=a1.map(r=>{const v=r.answers.A1;if(v===4)return `<div class="lane"><div class="seg2 dep" style="inset-inline-start:0;width:100%">${av(r,1)}</div></div>`;
+  const lanes=a1.map(r=>{const v=r.answers.B1;if(v===4)return `<div class="lane"><div class="seg2 dep" style="inset-inline-start:0;width:100%">${av(r,1)}</div></div>`;
     const [lo,hi]=BANDS[v];return `<div class="lane"><div class="seg2" style="inset-inline-start:${pos(lo)}%;width:${pos(hi)-pos(lo)}%;background:${PC[r.id]}">${av(r,1)}</div></div>`}).join("");
   const range=a1.length?`<div class="range">${lanes}<div class="axis">${common?`<div class="common" style="inset-inline-start:${pos(common[0])}%;width:${pos(common[1])-pos(common[0])}%"></div>`:""}</div><div class="ticks num"><span>300k</span><span>500k</span><span>750k</span><span>1M LYD</span></div></div>`:"";
-  const a2=topOpt(QI.A2,answered(rows,"A2")),a3d=dist(QI.A3,answered(rows,"A3"));
-  const fee=a2.i<0?"—":a2.tie?"Split":esc(QI.A2.o[a2.i][0]);
-  const commit=answered(rows,"A3").length?(a3d[2].length?`<span class="pill warn">${a3d[2].length} want to discuss</span>`:`<span class="pill good">Accepted</span>`):"—";
+  const a3d=dist(QI.B5,answered(rows,"B5"));
+  const commit=answered(rows,"B5").length?(a3d[2].length?`<span class="pill warn">${a3d[2].length} want to discuss</span>`:`<span class="pill good">Accepted</span>`):"—";
   return `<div class="panel"><h3>How much will it cost?</h3><p class="q3">Yearly budget, fee payment and commitment</p>
     <div class="big num">${head}</div><div class="mini">${sub}</div>${range}
-    <div class="kv"><div><span class="k">Preferred fee payment</span><span class="v">${fee}</span></div>
+    <div class="kv"><div><span class="k">Preferred fee payment</span><span class="v">${single(QI.B3,rows)}</span></div>
+    <div><span class="k">Budget released</span><span class="v">${single(QI.B4,rows)}</span></div>
     <div><span class="k">6-month commitment</span><span class="v">${commit}</span></div>
-    <div><span class="k">Budget first goes to</span><span class="v">${topList(QI.A4,rows)}</span></div></div></div>`;
+    <div><span class="k">Budget first goes to</span><span class="v">${topList(QI.B6,rows)}</span></div></div></div>`;
 }
-function topList(q,rows,k=2){const c=dist(q,answered(rows,q.id)).map((x,i)=>[x.length,i]).filter(x=>x[0]>0).sort((a,b)=>b[0]-a[0]).slice(0,k);return c.length?c.map(x=>esc(q.o[x[1]][0])).join(", "):"—"}
 function timePanel(rows){
-  const b2=answered(rows,"B2");const months=[1,3,6,12];
-  const pos=i=>[0,33.3,66.6,100][i];
-  const groups=[0,1,2,3].map(i=>by(b2,"B2",i));
-  const earliest=groups.findIndex(g=>g.length);
+  const b2=answered(rows,"C2");const months=[1,3,6,12];const pos=i=>[0,33.3,66.6,100][i];
+  const groups=[0,1,2,3].map(i=>by(b2,"C2",i));const earliest=groups.findIndex(g=>g.length);
   const head=earliest<0?"No answer yet":`${months[earliest]} ${months[earliest]===1?"month":"months"}`;
   const sub=earliest<0?"":`Earliest expectation, from ${names(groups[earliest])}`;
   const tl=`<div class="tl" style="--w:33.3%"><div class="line"></div><div class="early" title="Months 1–3: early indicators"></div>${[0,1,2,3].map(i=>`<span class="st" style="inset-inline-start:${pos(i)}%"></span><span class="lb" style="left:${pos(i)}%">${months[i]===12?"1 year":months[i]+(months[i]===1?" month":" months")}</span>${groups[i].length?`<span class="who" style="left:${pos(i)}%">${groups[i].map(r=>av(r,1)).join("")}</span>`:""}`).join("")}</div>`;
-  const track=answered(rows,"B4"),none=by(rows,"B4",4);
+  const track=answered(rows,"C5"),none=by(rows,"C5",4);
   return `<div class="panel"><h3>How long until results?</h3><p class="q3">When they expect the first clear results</p>
     <div class="big num">${head}</div><div class="mini">${sub}</div>${tl}
     <div class="mini" style="margin-top:4px"><span class="pill info">Gold</span> months 1–3: agree early signs of progress (inquiries, leads) so results are visible from the start.</div>
-    <div class="kv"><div><span class="k">Results that prove success</span><span class="v">${topList(QI.B1,rows,3)}</span></div>
-    <div><span class="k">Policies per month today</span><span class="v">${single(QI.B3,rows)}</span></div>
-    <div><span class="k">Tracking today</span><span class="v">${!track.length?"—":none.length?`<span class="pill bad">Nothing tracked (${none.length})</span>`:topList(QI.B4,rows,3)}</span></div></div></div>`;
+    <div class="kv"><div><span class="k">Results that prove success</span><span class="v">${topList(QI.C1,rows,3)}</span></div>
+    <div><span class="k">Policies per month today</span><span class="v">${single(QI.C3,rows)}</span></div>
+    <div><span class="k">Tracking today</span><span class="v">${!track.length?"—":none.length?`<span class="pill bad">Nothing tracked (${none.length})</span>`:topList(QI.C5,rows,3)}</span></div></div></div>`;
 }
-function single(q,rows){const t=topOpt(q,answered(rows,q.id));return t.i<0?"—":t.tie?"Split":esc(q.o[t.i][0])}
 function workPanel(rows){
-  const c1=topOpt(QI.C1,answered(rows,"C1"));
-  const head=c1.i<0?"No answer yet":c1.tie?"Owners are split":esc(QI.C1.o[c1.i][0]);
-  const c3=answered(rows,"C3");const slow=c3.length?Math.max(...c3.map(r=>r.answers.C3)):-1;
-  const rep=[...new Set(answered(rows,"C4").flatMap(r=>r.answers.C4))].sort().map(i=>esc(QI.C4.o[i][0]));
-  const contacts=answered(rows,"C2").map(r=>`<span ${/[؀-ۿ]/.test(r.answers.C2)?'class="ar" dir="rtl"':""}>${esc(r.answers.C2)}</span>`);
+  const c1=topOpt(QI.H1,answered(rows,"H1"));
+  const head=c1.i<0?"No answer yet":c1.tie?"Owners are split":esc(QI.H1.o[c1.i][0]);
+  const c3=answered(rows,"H2");const slow=c3.length?Math.max(...c3.map(r=>r.answers.H2)):-1;
+  const rep=[...new Set(answered(rows,"H4").flatMap(r=>r.answers.H4))].sort().map(i=>esc(QI.H4.o[i][0]));
+  const contacts=answered(rows,"H3").map(r=>`<span ${/[؀-ۿ]/.test(r.answers.H3)?'class="ar" dir="rtl"':""}>${esc(r.answers.H3)}</span>`);
   return `<div class="panel"><h3>How will the work run?</h3><p class="q3">Involvement, approvals, reporting and contact</p>
-    <div class="big">${head}</div><div class="mini">${c1.i<0?"":`Involvement level most chosen (${c1.n} of ${answered(rows,"C1").length})`}</div>
-    <div class="kv"><div><span class="k">Plan approvals around</span><span class="v">${slow<0?"—":esc(QI.C3.o[slow][0])+(slow===2?' <span class="pill warn">slow</span>':"")}</span></div>
+    <div class="big">${head}</div><div class="mini">${c1.i<0?"":`Involvement level most chosen (${c1.n} of ${answered(rows,"H1").length})`}</div>
+    <div class="kv"><div><span class="k">Plan approvals around</span><span class="v">${slow<0?"—":esc(QI.H2.o[slow][0])+(slow===2?' <span class="pill warn">slow</span>':"")}</span></div>
     <div><span class="k">Reporting (everything asked for)</span><span class="v">${rep.join(", ")||"—"}</span></div>
-    <div><span class="k">Day-to-day contact</span><span class="v">${contacts.join("<br>")||"—"}</span></div>
-    <div><span class="k">Marketing staff today</span><span class="v">${single(QI.C5,rows)}</span></div>
-    <div><span class="k">Plan to hire</span><span class="v">${single(QI.C6,rows)}</span></div></div></div>`;
+    <div><span class="k">Approver and contact</span><span class="v">${contacts.join("<br>")||"—"}</span></div>
+    <div><span class="k">Marketing staff today</span><span class="v">${single(QI.F8,rows)}</span></div>
+    <div><span class="k">Plan to hire marketing staff</span><span class="v">${single(QI.F9,rows)}</span></div></div></div>`;
+}
+
+/* ---------- goals, standing, readiness, products, capacity ---------- */
+function rankList(q,rows,k){const s=rankScores(q,rows).slice(0,k||q.o.length);if(!answered(rows,q.id).length)return `<div class="empty">No answers yet</div>`;
+  return `<div>${s.map((x,j)=>`<div class="rk-row"><span class="pos num">${j+1}</span><span class="lbl">${tx(q.o[x.i])}</span><span class="tr"><i data-w="${x.score}"></i></span><span class="n num">${x.score}</span></div>`).join("")}</div>`+
+   `<div class="firsts">Ranked first: ${s.filter(x=>x.firsts.length).map(x=>`${x.firsts.map(r=>av(r,1)).join("")} ${esc(q.o[x.i][0])}`).join(" · ")}</div>`}
+function numBlock(q,rows,short){const v=numVals(rows,q.id),dk=rows.filter(r=>r.answers[q.id]==="dk");
+  if(!v.length)return `<div class="empty">${dk.length?`Don't know: ${names(dk)}`:"No answers yet"}</div>`;
+  const mx=Math.max(...v.map(x=>x[1]),1),xs=v.map(x=>x[1]);
+  return `<div class="nums">${v.map(([r,n])=>`<div class="nr">${av(r,1)}<span class="tr"><i data-w="${n/mx*100}" style="background:${PC[r.id]}"></i></span><span class="v num">${short?fmtM(n):fmtN(n)}</span></div>`).join("")}</div>
+   <div class="nstat"><span>Middle <b class="num">${short?fmtM(median(xs)):fmtN(median(xs))}</b></span><span>Lowest <b class="num">${short?fmtM(Math.min(...xs)):fmtN(Math.min(...xs))}</b></span><span>Highest <b class="num">${short?fmtM(Math.max(...xs)):fmtN(Math.max(...xs))}</b></span>${dk.length?`<span>Don't know: ${names(dk)}</span>`:""}</div>`}
+function goalsPanel(rows){
+  const a5=answered(rows,"A5");
+  return `<div class="panel"><h3>What they want from Year 1</h3><p class="q3">Priority ranking and their own premium targets</p>
+    <div class="blk"><h5>12-month priorities (score out of 100)</h5>${rankList(QI.A1,rows)}</div>
+    <div class="blk"><h5>Year-1 premium target (LYD)</h5>${numBlock(QI.A2,rows,1)}</div>
+    <div class="blk"><h5>Year-3 premium target (LYD)</h5>${numBlock(QI.A3,rows,1)}</div>
+    <div class="blk"><h5>Corporate clients today, against the plan's 100</h5>${numBlock(QI.A4,rows)}
+      <div class="chips" style="margin-top:8px">${a5.length?dist(QI.A5,a5).map((x,i)=>x.length?`<span class="chip">${esc(QI.A5.o[i][0])}: <b>${x.length}</b></span>`:"").join(""):""}</div></div></div>`;
+}
+function standPanel(rows){
+  if(!answered(rows,"E6").length)return `<div class="panel"><h3>Where Al-Masar stands</h3><p class="q3">Their own rating against competitors</p><div class="empty">No answers yet</div></div>`;
+  return `<div class="panel"><h3>Where Al-Masar stands</h3><p class="q3">Their own rating against competitors, 1 (much weaker) to 5 (much stronger). Gold mark = average.</p>${scaleBody(QI.E6,rows)}
+    <p class="note">Strengths here are candidates for the main message, once operations confirm them.</p></div>`}
+function scaleBody(q,rows){const s=scaleStats(q,rows);const p=v=>(v-1)/4*100;
+  if(!answered(rows,q.id).length)return `<div class="empty">No answers yet</div>`;
+  return `<div class="sc-r sc-head" aria-hidden="true"><span></span><span class="sc-t">${[1,2,3,4,5].map(n=>`<span class="tl2" style="inset-inline-start:${p(n)}%">${n}</span>`).join("")}</span><span></span></div>
+    <div class="sc">${s.slice().sort((a,b)=>(b.avg||0)-(a.avg||0)).map(x=>`<div class="sc-r"><span class="lbl">${tx(q.items[x.i])}</span><span class="sc-t"><span class="ln"></span>${[1,2,3,4,5].map(n=>`<span class="tk" style="inset-inline-start:${p(n)}%"></span>`).join("")}${x.avg!=null?`<span class="avgm" style="inset-inline-start:${p(x.avg)}%"></span>`:""}${spread(x.v).map(([r,n,o])=>`<span class="pd" style="inset-inline-start:calc(${p(n)}% + ${o}px)">${av(r,1)}</span>`).join("")}</span><span class="avg num">${x.avg==null?"—":x.avg.toFixed(1)}</span></div>`).join("")}</div>`;
+}
+function spread(v){const tot={},seen={};v.forEach(([r,n])=>tot[n]=(tot[n]||0)+1);return v.map(([r,n])=>{seen[n]=(seen[n]||0)+1;return [r,n,Math.round((seen[n]-1-(tot[n]-1)/2)*16)]})}
+/* readiness: our scoring of the basics a campaign needs. Each part is 0-100; the score is their average. */
+const READY=[
+ ["Tracking results","C5",a=>Array.isArray(a)?(a.includes(4)?0:a.length/4):null],
+ ["Lead and customer records","C6",a=>[1,.6,.2,0][a]],
+ ["Customer data for follow-up","C7",a=>[1,.6,0,.3][a]],
+ ["Claims contact channels","E3",a=>Array.isArray(a)?(a.filter(i=>i<4).length/4):null],
+ ["Digital services","E4",a=>Array.isArray(a)?(a.filter(i=>i<5).length/5):null],
+ ["In-house marketing staff","F8",a=>[0,.5,1][a]]];
+function readiness(rows){return READY.map(([lbl,id,fn])=>{const xs=answered(rows,id).map(r=>fn(r.answers[id])).filter(x=>x!=null);return {lbl,id,v:xs.length?xs.reduce((a,b)=>a+b,0)/xs.length:null}})}
+function readyPanel(rows){const parts=readiness(rows),ok=parts.filter(x=>x.v!=null);
+  const score=ok.length?Math.round(ok.reduce((a,x)=>a+x.v,0)/ok.length*100):null;
+  return `<div class="panel"><h3>Ready for campaigns?</h3><p class="q3">Our score of the basics a campaign needs, from their answers</p>
+    <div class="ready">${score==null?`<div class="empty">No answers yet</div>`:ring(score,96,score)}<div class="mini">${score==null?"":score>=60?"Ready for steady campaigns.":score>=35?"Fix the weakest parts below before large campaigns.":"Set up the basics before spending on ads."}</div></div>
+    <div class="blk">${parts.map(x=>{const p=x.v==null?null:Math.round(x.v*100);return `<div class="comp"><span>${x.lbl} <span class="mini">(${x.id})</span></span><span class="tr"><i data-w="${p||0}" style="background:${p==null?"#ccc":p>=60?"#1F7A4D":p>=35?"#EAA918":"#B42318"}"></i></span><span class="n num">${p==null?"—":p}</span></div>`}).join("")}</div>
+    <p class="note">How we score it: each part is 0–100 from the answer (for example, a CRM = 100, Excel = 60, paper = 20, nothing = 0). The overall score is the average.</p></div>`;
+}
+function productsPanel(rows){
+  return `<div class="panel"><h3>Products and customers</h3><p class="q3">What to push first, to whom and where</p>
+    <div class="blk"><h5>Product priority (score out of 100)</h5>${rankList(QI.D1,rows)}</div>
+    <div class="kv"><div><span class="k">Main focus</span><span class="v">${single(QI.D2,rows)}</span></div>
+    <div><span class="k">Target sales split</span><span class="v">${single(QI.D3,rows)}</span></div>
+    <div><span class="k">First sectors</span><span class="v">${topList(QI.D4,rows,3)}</span></div>
+    <div><span class="k">Cities</span><span class="v">${topList(QI.D5,rows,4)}</span></div>
+    <div><span class="k">Pricing</span><span class="v">${single(QI.D6,rows)}</span></div>
+    <div><span class="k">Compulsory motor share</span><span class="v">${single(QI.D8,rows)}</span></div>
+    <div><span class="k">Takaful window</span><span class="v">${single(QI.D9,rows)}</span></div></div></div>`;
+}
+const WORKDAYS=22;
+function capacityPanel(rows){const cap=numVals(rows,"C4").map(x=>x[1]);const mid=cap.length?median(cap):null;
+  return `<div class="panel"><h3>Sales team and capacity</h3><p class="q3">How much demand the offices can handle</p>
+    <div class="blk"><h5>Policies a day the offices can issue</h5>${numBlock(QI.C4,rows)}
+      ${mid!=null?`<div class="mini" style="margin-top:8px">About <b class="num">${fmtN(Math.round(mid*WORKDAYS))}</b> policies a month at the middle answer, counting ${WORKDAYS} working days. Today: <b>${single(QI.C3,rows)}</b> a month.</div>`:""}</div>
+    <div class="blk"><h5>Sales offices</h5>${numBlock(QI.F1,rows)}</div>
+    <div class="blk"><h5>Sales staff now</h5>${numBlock(QI.F2,rows)}</div>
+    <div class="blk"><h5>Sales staff to hire in 12 months</h5>${numBlock(QI.F3,rows)}</div>
+    <div class="kv"><div><span class="k">How staff are paid</span><span class="v">${single(QI.F4,rows)}</span></div>
+    <div><span class="k">Skills to train first</span><span class="v">${topList(QI.F5,rows,3)}</span></div>
+    <div><span class="k">Corporate accounts handled by</span><span class="v">${single(QI.F7,rows)}</span></div></div></div>`;
 }
 
 /* ---------- findings ---------- */
-function findings(rows){
-  const F=[];
-  const low=by(rows,"A1",0),high=[...by(rows,"A1",2),...by(rows,"A1",3)];
-  if(low.length&&high.length)F.push(f("warn","Budget views are far apart",`${names(low)} chose 300–400k while ${names(high)} chose above 500k. Present a base plan and a larger plan side by side.`));
-  const disc=by(rows,"A3",2);if(disc.length)F.push(f("warn","6-month commitment needs a conversation",`Want to discuss it: ${names(disc)}. Prepare what is delivered in each of the six months.`));
-  else if(answered(rows,"A3").length)F.push(f("good","6-month commitment accepted",`Everyone who answered accepts it${by(rows,"A3",1).length?`; ${names(by(rows,"A3",1))} would commit to the full year`:""}.`));
-  const one=by(rows,"B2",0),three=by(rows,"B2",1);
-  if(one.length)F.push(f("bad","Expect results within a month",`Chose within 1 month: ${names(one)}. Agree early signs of progress for months 1–3 before the plan starts, or the first month will feel like a failure.`));
+function findings(rows,solo){
+  const F=[];const g=!solo;
+  const low=by(rows,"B1",0),high=[...by(rows,"B1",2),...by(rows,"B1",3)];
+  if(g&&low.length&&high.length)F.push(f("warn","Budget views are far apart",`${names(low)} chose 300–400k while ${names(high)} chose above 500k. Present a base plan and a larger plan side by side.`,1));
+  const fee=by(rows,"B2",7),nofee=answered(rows,"B2").filter(r=>!r.answers.B2.includes(7));
+  if(g&&fee.length&&nofee.length)F.push(f("warn","Not everyone counts our fees inside the budget",`Included consulting fees: ${names(fee)}. Did not: ${names(nofee)}. Agree this before quoting a number.`,1));
+  const disc=by(rows,"B5",2);if(disc.length)F.push(f("warn","6-month commitment needs a conversation",`Want to discuss it: ${names(disc)}. Prepare what is delivered in each of the six months.`));
+  else if(g&&answered(rows,"B5").length)F.push(f("good","6-month commitment accepted",`Everyone who answered accepts it${by(rows,"B5",1).length?`; ${names(by(rows,"B5",1))} would commit to the full year`:""}.`,1));
+  const one=by(rows,"C2",0),three=by(rows,"C2",1);
+  if(one.length)F.push(f("bad","Expect results within a month",`Chose within 1 month: ${names(one)}. Agree early signs of progress for months 1–3 before the plan starts.`));
   else if(three.length)F.push(f("warn","Expect results within 3 months",`Chose within 3 months: ${names(three)}. Show clear early indicators in the first monthly report.`));
-  const none=by(rows,"B4",4);if(none.length)F.push(f("bad","No baseline today",`Said nothing is tracked: ${names(none)}. Set up basic tracking (policies, inquiries, where customers heard about Al-Masar) in month 1, or results can't be proven.`));
-  const micro=by(rows,"C1",0),slow=by(rows,"C3",2);
+  const y1=numVals(rows,"A2").map(x=>x[1]);if(g&&y1.length>1&&Math.max(...y1)>=2*Math.min(...y1))F.push(f("warn","Premium targets are far apart",`Year-1 targets range from ${fmtM(Math.min(...y1))} to ${fmtM(Math.max(...y1))} LYD. Settle one target before KPIs are set.`,1));
+  const a1=answered(rows,"A1"),firsts=new Set(a1.map(r=>r.answers.A1[0]));if(g&&a1.length>1&&firsts.size>1)F.push(f("warn","Different top priorities",a1.map(r=>`${nm(r)}: <b>${esc(QI.A1.o[r.answers.A1[0]][0])}</b>`).join(", ")+". The plan needs one lead goal.",1));
+  const none=by(rows,"C5",4);if(none.length)F.push(f("bad","No baseline today",`Said nothing is tracked: ${names(none)}. Set up basic tracking (policies, inquiries, where customers heard about Al-Masar) in month 1.`));
+  const paper=[...by(rows,"C6",2),...by(rows,"C6",3)];if(paper.length)F.push(f("warn","No proper lead records",`Paper or nothing organised: ${names(paper)}. A simple shared sheet or CRM is needed before lead campaigns.`));
+  const noData=by(rows,"C7",2);if(noData.length)F.push(f("warn","Renewal reminders may not be possible",`Said we can't keep customer phone numbers and renewal dates: ${names(noData)}.`));
+  const cap=numVals(rows,"C4").map(x=>x[1]);if(g&&cap.length){const mon=median(cap)*WORKDAYS,c3=topOpt(QI.C3,answered(rows,"C3"));const lowB=[0,50,200,500][c3.i];
+    if(c3.i>=0&&c3.i<4&&lowB>=mon*.8)F.push(f("bad","Offices are close to capacity",`About ${fmtN(Math.round(mon))} policies a month is the limit, and they already issue ${esc(QI.C3.o[c3.i][0])}. Grow capacity before big campaigns.`,1));
+    else F.push(f("info","Office capacity",`About ${fmtN(Math.round(mon))} policies a month (middle answer × ${WORKDAYS} working days). Size campaign volumes to this.`,1))}
+  const cant=by(rows,"E2",3),prom=answered(rows,"E2").filter(r=>r.answers.E2<3);
+  if(cant.length)F.push(f("warn","Don't advertise a claims time yet",`Can't promise a settlement time yet: ${names(cant)}.`));
+  else if(g&&prom.length)F.push(f("good","A claims promise is possible",`The safest time all agree on: <b>${esc(QI.E2.o[Math.max(...prom.map(r=>r.answers.E2))][0])}</b>. Confirm with operations before any ad uses it.`,1));
+  if(g&&answered(rows,"E6").length){const s=scaleStats(QI.E6,rows).filter(x=>x.avg!=null).sort((a,b)=>a.avg-b.avg);const w=s[0],st=s[s.length-1];
+    if(w&&w.avg<=2.5)F.push(f("warn","Weakest point, by their own rating",`<b>${esc(QI.E6.items[w.i][0])}</b> (${w.avg.toFixed(1)} of 5). Don't build campaigns on it until it improves.`,1));
+    if(st&&st.avg>=3.5)F.push(f("good","Strongest point, by their own rating",`<b>${esc(QI.E6.items[st.i][0])}</b> (${st.avg.toFixed(1)} of 5). A candidate for the main message.`,1))}
+  if(g){const parts=readiness(rows).filter(x=>x.v!=null);if(parts.length){const sc=Math.round(parts.reduce((a,x)=>a+x.v,0)/parts.length*100);if(sc<35)F.push(f("bad","Low campaign readiness",`Readiness score ${sc} of 100. Set up tracking, records and claims contact before spending on ads.`,1))}}
+  const micro=by(rows,"H1",0),slow=by(rows,"H2",2);
   if(micro.length)F.push(f("warn","Want to approve every post and ad",`Chose this: ${names(micro)}.${slow.length?` Approvals may take up to a week, according to ${names(slow)}.`:""} Propose a monthly content calendar approved in one sitting.`));
   else if(slow.length)F.push(f("warn","Slow approvals",`Approvals may take up to a week, according to ${names(slow)}. Build that into the content schedule.`));
-  const noStaff=by(rows,"C5",0),noHire=by(rows,"C6",1);
+  const noStaff=by(rows,"F8",0),noHire=by(rows,"F9",1);
   if(noStaff.length)F.push(f(noHire.length?"warn":"info","No marketing staff in-house",`According to ${names(noStaff)}.${noHire.length?` No plan to hire, according to ${names(noHire)}, so plan for more hands-on work from our side.`:" Helping them hire and train is a selling point."}`));
-  const d2=answered(rows,"D2");if(d2.length>1){const ag=agreement(QI.D2,rows),t=topOpt(QI.D2,d2);F.push(f(ag===1?"good":"warn","Main focus",t.tie?`Owners are split (${Math.round(ag*100)}% agreement). Settle this before the message is written.`:`<b>${esc(QI.D2.o[t.i][0])}</b>${ag===1?", everyone agrees.":` is most chosen, but not by everyone (${Math.round(ag*100)}% agreement).`}`))}
-  const d5=answered(rows,"D5");if(d5.length){const ok=dist(QI.D5,d5).map((x,i)=>[x,i]).filter(x=>x[0].length===d5.length&&x[1]!==5).map(x=>esc(QI.D5.o[x[1]][0]));
-    F.push(f(ok.length?"good":"warn","What we can say publicly",ok.length?`Everyone approved: <b>${ok.join(", ")}</b>. Anything else needs sign-off before a campaign uses it.`:"No claim is approved by everyone yet. Confirm before any campaign uses one."))}
-  const e1=answered(rows,"E1");if(e1.length)F.push(f("info","Their main concerns",e1.map(r=>`<b>${nm(r)}:</b> <span class="ar" dir="rtl">${esc(r.answers.E1)}</span>`).join("<br>")));
+  const tk=[...by(rows,"D9",0),...by(rows,"D9",1)];if(g&&tk.length)F.push(f("info","Takaful",`Active or planned, according to ${names(tk)}. All five named competitors run a takaful window (regulator register).`,1));
+  const d2=answered(rows,"D2");if(g&&d2.length>1){const ag=agreement(QI.D2,rows),t=topOpt(QI.D2,d2);F.push(f(ag===1?"good":"warn","Main focus",t.tie?`Owners are split (${Math.round(ag*100)}% agreement). Settle this before the message is written.`:`<b>${esc(QI.D2.o[t.i][0])}</b>${ag===1?", everyone agrees.":` is most chosen, but not by everyone (${Math.round(ag*100)}% agreement).`}`,1))}
+  const d5=answered(rows,"E5");if(g&&d5.length){const ok=dist(QI.E5,d5).map((x,i)=>[x,i]).filter(x=>x[0].length===d5.length&&x[1]!==5).map(x=>esc(QI.E5.o[x[1]][0]));
+    F.push(f(ok.length?"good":"warn","What we can say publicly",ok.length?`Everyone approved: <b>${ok.join(", ")}</b>. Anything else needs sign-off before a campaign uses it.`:"No claim is approved by everyone yet. Confirm before any campaign uses one.",1))}
+  const e1=answered(rows,"I2");if(g&&e1.length)F.push(f("info","Their main concerns",e1.map(r=>`<b>${nm(r)}:</b> <span class="ar" dir="rtl">${esc(r.answers.I2)}</span>`).join("<br>"),1));
   return F;
 }
 
 /* ---------- agreement map ---------- */
 function agreeMap(rows){
-  const list=ALLQ.filter(q=>q.o).map(q=>[q,agreement(q,rows)]).filter(x=>x[1]!=null).sort((a,b)=>a[1]-b[1]);
+  const list=ALLQ.filter(q=>q.o||q.items).map(q=>[q,agreement(q,rows)]).filter(x=>x[1]!=null).sort((a,b)=>a[1]-b[1]);
   if(!list.length)return `<div class="panel empty">Agreement appears once two or more people answer.</div>`;
-  return `<div class="panel"><div class="agree-list">${list.map(([q,a])=>`<button class="ag lv-${lvl(a)}" type="button" data-jump="${q.id}"><span class="id">${q.id}</span><span class="lbl">${esc(q.label)}</span><span class="tr"><i data-w="${Math.round(a*100)}"></i></span><span class="pc num">${Math.round(a*100)}%</span></button>`).join("")}</div></div>`;
+  return `<div class="panel"><div class="agree-list">${list.map(([q,a])=>`<button class="ag lv-${lvl(a)}" type="button" data-jump="${q.id}"><span class="id">${q.id}</span><span class="lbl">${esc(q.label)}</span><span class="tr"><i data-w="${Math.round(a*100)}"></i></span><span class="pc num">${Math.round(a*100)}%</span></button>`).join("")}</div>
+   <p class="note">Single choice: share who picked the most common answer. Several choices and rankings: how much their picks overlap (top 3 for rankings). Ratings: how close their scores are.</p></div>`;
 }
 
 /* ---------- question cards ---------- */
 function qCard(q,rows){
   const ans=rows.filter(r=>has(q,r.answers));let body="",meta=`<span>${ans.length} of ${rows.length} answered</span>`;
-  if(q.o){const c=dist(q,ans);const mx=Math.max(1,...c.map(x=>x.length));const top=Math.max(...c.map(x=>x.length));
-    body=c.map((x,i)=>`<div class="opt ${x.length&&x.length===top?"top":""}"><div class="lbl">${tx(q.o[i])}</div><div class="tr"><i data-w="${x.length/mx*100}"></i></div><div class="n num">${x.length}</div>${x.length?`<div class="whos">${x.map(r=>av(r,1)).join("")}</div>`:""}</div>`).join("");
-    const ag=agreement(q,rows);if(ag!=null)meta+=`<span class="pill ${lvl(ag)}">${Math.round(ag*100)}% agree</span>`;
-    if(q.comment){const cm=rows.filter(r=>r.answers[q.id+"_c"]);if(cm.length)body+=`<div class="texts" style="margin-top:12px">`+cm.map(r=>`<div class="tx">${av(r,1)}<div><div class="by">${nm(r)}</div><div class="t ar" dir="auto">${esc(r.answers[q.id+"_c"])}</div></div></div>`).join("")+`</div>`}
-  }else body=ans.length?`<div class="texts">`+ans.map(r=>`<div class="tx">${av(r,1)}<div><div class="by">${nm(r)}${r.role?" · "+esc(r.role):""}</div><div class="t ar" dir="auto">${esc(r.answers[q.id])}</div></div></div>`).join("")+`</div>`:`<div class="empty">No answers yet</div>`;
+  const ag=agreement(q,rows);if(ag!=null)meta+=`<span class="pill ${lvl(ag)}">${Math.round(ag*100)}% agree</span>`;
+  if(q.type==="rank")body=rankList(q,rows);
+  else if(q.type==="number")body=numBlock(q,rows,q.unit&&q.unit[0]==="LYD");
+  else if(q.type==="scale")body=scaleBody(q,rows);
+  else if(q.o){const c=dist(q,ans);const mx=Math.max(1,...c.map(x=>x.length));const top=Math.max(...c.map(x=>x.length));
+    body=c.map((x,i)=>`<div class="opt ${x.length&&x.length===top?"top":""}"><div class="lbl">${tx(q.o[i])}</div><div class="tr"><i data-w="${x.length/mx*100}"></i></div><div class="n num">${x.length}</div>${x.length?`<div class="whos">${x.map(r=>av(r,1)).join("")}</div>`:""}</div>`).join("")}
+  else body=ans.length?`<div class="texts">`+ans.map(r=>`<div class="tx">${av(r,1)}<div><div class="by">${nm(r)}${r.role?" · "+esc(r.role):""}</div><div class="t ar" dir="auto">${esc(r.answers[q.id])}</div></div></div>`).join("")+`</div>`:`<div class="empty">No answers yet</div>`;
+  if(q.comment){const cm=rows.filter(r=>r.answers[q.id+"_c"]);if(cm.length)body+=`<div class="texts" style="margin-top:12px">`+cm.map(r=>`<div class="tx">${av(r,1)}<div><div class="by">${nm(r)}</div><div class="t ar" dir="auto">${esc(r.answers[q.id+"_c"])}</div></div></div>`).join("")+`</div>`}
   return `<div class="panel qc" id="q-${q.id}"><h4><span class="qid">${q.id}</span>${tx(q.t)}</h4><div class="meta">${meta}</div>${body}</div>`;
 }
 
@@ -463,7 +628,7 @@ function compare(rows){
   SV.sections.forEach(s=>{h+=`<tr class="sec"><th colspan="${rows.length+1}">${tx(s.t)}</th></tr>`;
     s.q.forEach(q=>{const t=q.type==="single"?topOpt(q,answered(rows,q.id)):null;
       h+=`<tr><th><span class="id">${q.id}</span>${esc(q.label)}</th>`+rows.map(r=>{const a=ansText(q,r.answers,L);const diff=t&&!t.tie&&t.i>=0&&r.answers[q.id]!=null&&r.answers[q.id]!==t.i&&answered(rows,q.id).length>1;
-        return `<td class="${a?"":"none"} ${diff?"diff":""}"><div class="t ${L||!q.o?"ar":""}" dir="auto">${esc(a||"No answer")}</div></td>`}).join("")+`</tr>`})});
+        return `<td class="${a?"":"none"} ${diff?"diff":""}"><div class="t ${L||q.type==="text"||q.type==="short"?"ar":""}" dir="auto">${esc(a||"No answer")}</div></td>`}).join("")+`</tr>`})});
   return h+`</tbody></table></div>`;
 }
 
@@ -472,14 +637,14 @@ function personView(rows){
   if(!person||!rows.find(r=>r.id===person))person=rows[0]&&rows[0].id;
   const p=rows.find(r=>r.id===person);if(!p)return "";
   const n=ALLQ.filter(q=>has(q,p.answers)).length,C=2*Math.PI*34;
-  const fl=findings([p]).filter(x=>(x.lv==="bad"||x.lv==="warn")&&x.t!=="Main focus");
+  const fl=findings([p],true).filter(x=>x.lv==="bad"||x.lv==="warn");
   const recv=new Date(p.receivedAt);
   let h=`<div class="pp no-print" role="group" aria-label="Choose a person">${rows.map(r=>`<button type="button" data-person="${esc(r.id)}" aria-pressed="${r.id===person}">${av(r)}<span>${nm(r)}</span></button>`).join("")}</div>
   <div class="stack reveal"><div class="panel"><div class="phead"><div class="ring"><svg viewBox="0 0 84 84" aria-hidden="true"><circle cx="42" cy="42" r="34" fill="none" stroke="#E3E5EE" stroke-width="8"/><circle class="f2" cx="42" cy="42" r="34" fill="none" stroke="#EAA918" stroke-width="8" stroke-linecap="round" stroke-dasharray="${C}" stroke-dashoffset="${C}" data-to="${C*(1-n/ALLQ.length)}"/></svg><b class="num">${n}</b></div>
     <div><div style="font-size:26px;font-weight:900;line-height:1.2">${nm(p)}</div><div class="mini">${esc(p.role||"Role not given")} · answered ${n} of ${ALLQ.length} · ${isNaN(recv)?"":esc(recv.toLocaleString("en-GB",{day:"numeric",month:"short",hour:"2-digit",minute:"2-digit"}))} · filled in ${p.lang==="en"?"English":"Arabic"}</div></div></div></div>`;
   if(fl.length)h+=`<div>${fHTML(fl)}</div>`;
   SV.sections.forEach(s=>{h+=`<div class="panel"><h3 style="margin-bottom:6px">${tx(s.t)}</h3>`+s.q.map(q=>{const a=ansText(q,p.answers,L);const t=q.type==="single"?topOpt(q,answered(rows,q.id)):null;const diff=rows.length>1&&t&&!t.tie&&t.i>=0&&p.answers[q.id]!=null&&p.answers[q.id]!==t.i;
-    return `<div class="ans"><div class="q"><b>${q.id}</b>${tx(q.t)}</div><div class="a ${a?"":"none"} ${L||!q.o?"ar":""}" dir="auto">${esc(a||"No answer")}${diff?`<span class="tagm">differs from others</span>`:""}</div></div>`}).join("")+`</div>`});
+    return `<div class="ans"><div class="q"><b>${q.id}</b>${tx(q.t)}</div><div class="a ${a?"":"none"} ${L||q.type==="text"||q.type==="short"?"ar":""}" dir="auto">${esc(a||"No answer")}${diff?`<span class="tagm">differs from others</span>`:""}</div></div>`}).join("")+`</div>`});
   return h+`</div>`;
 }
 
@@ -496,6 +661,10 @@ function render(){
   if(view==="plan"){
     h+=`<div class="three reveal">${costPanel(rows)}${timePanel(rows)}${workPanel(rows)}</div>
       <h2 class="h2">What to act on</h2><p class="sub">Flags drawn from the answers, most urgent first.</p><div class="reveal">${fHTML(sortF(findings(rows)))}</div>
+      <h2 class="h2">Goals and position</h2><p class="sub">Their targets, how they rate Al-Masar, and how ready the company is for campaigns.</p>
+      <div class="two reveal">${goalsPanel(rows)}<div class="stack">${standPanel(rows)}${readyPanel(rows)}</div></div>
+      <h2 class="h2">Market and sales capacity</h2><p class="sub">What to sell first, and how much demand the offices can serve.</p>
+      <div class="two reveal">${productsPanel(rows)}${capacityPanel(rows)}</div>
       <h2 class="h2">Where they agree and disagree</h2><p class="sub">Lowest agreement first. Click a row to open that question.</p><div class="reveal">${agreeMap(rows)}</div>`;
   }else if(view==="questions"){
     SV.sections.forEach(s=>{h+=`<div class="sec-h"><h2>${tx(s.t)}</h2><span>${s.q.length} questions</span></div><div class="qgrid reveal">${s.q.map(q=>qCard(q,rows)).join("")}</div>`});
@@ -509,7 +678,6 @@ function wireBody(){
   document.querySelectorAll("[data-person]").forEach(b=>b.onclick=()=>{person=b.dataset.person;view="person";keep();render()});
   document.querySelectorAll("[data-jump]").forEach(b=>b.onclick=()=>{view="questions";keep();render();const el=$("#q-"+b.dataset.jump);if(el){el.scrollIntoView({behavior:RM?"auto":"smooth",block:"start"});el.classList.add("flash");setTimeout(()=>el.classList.remove("flash"),1600)}});
 }
-// animate: bars grow, numbers count up, ring fills
 function go(){
   requestAnimationFrame(()=>requestAnimationFrame(()=>{
     $("#main").classList.add("go");
@@ -529,7 +697,7 @@ document.addEventListener("keydown",e=>{if(e.key==="Escape")closeMenu()});
 $("#csv").onclick=()=>{closeMenu();if(!R||!R.length)return;const head=["Name","Role","Received","Language",...ALLQ.map(q=>q.id+" "+q.label)];
   const lines=[head,...R.map(r=>[r.name,r.role,r.receivedAt,r.lang,...ALLQ.map(q=>ansText(q,r.answers,L))])].map(row=>row.map(c=>'"'+String(c==null?"":c).replace(/"/g,'""')+'"').join(","));
   download("almasar-owners-answers.csv","﻿"+lines.join("\r\n"),"text/csv;charset=utf-8")};
-$("#json").onclick=()=>{closeMenu();if(!R)return;download("almasar-owners-answers.json",JSON.stringify({questions:SV,responses:R},null,2),"application/json")};
+$("#json").onclick=()=>{closeMenu();if(!R)return;download("almasar-owners-answers.json",JSON.stringify({questions:SV,responses:R,earlierVersion:OLD},null,2),"application/json")};
 $("#prt").onclick=()=>{closeMenu();setTimeout(()=>window.print(),60)};
 $("#disc").onclick=()=>{closeMenu();conn={};try{localStorage.removeItem(LS)}catch(e){};R=null;render()};
 $("#refresh").onclick=()=>{if(demo){render();return}load()};

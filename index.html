@@ -7,7 +7,7 @@
 <meta name="theme-color" content="#172A77">
 <title>استبيان رؤية الإدارة | المسار للتأمين</title>
 <meta property="og:title" content="استبيان رؤية الإدارة | المسار للتأمين">
-<meta property="og:description" content="23 سؤالاً، حوالي 10 دقائق، وإجاباتكم سرية">
+<meta property="og:description" content="58 سؤالاً، معظمها بلمسة واحدة، حوالي 20 دقيقة، وإجاباتكم سرية">
 <meta property="og:image" content="https://yaseenhamied.github.io/almasar-survey/assets/og.png">
 <meta property="og:type" content="website">
 <link rel="icon" href="assets/symbol.png">
@@ -151,7 +151,32 @@ h1.plain{font-size:40px;line-height:1.15;font-weight:900;margin:0 0 10px}
 .row:has(input:checked){background:#F6F7FC}
 .row:has(input:focus-visible){outline:3px solid var(--gold);outline-offset:-3px}
 .row.off{cursor:not-allowed}.row.off .txt{color:var(--ink3)}
-.row.bump .mk{animation:bump .34s var(--ease-out)}
+.row.bump .mk,.row.bump .rkn{animation:bump .34s var(--ease-out)}
+/* rank: tap in order */
+button.row{width:100%;border:0;background:transparent;text-align:start;font:inherit;color:inherit}
+.row.rk .rkn{width:30px;height:30px;flex:none;border-radius:50%;border:2px dashed #C3C7D9;display:grid;place-items:center;font-weight:900;font-size:15px;transition:background var(--t-ui) var(--ease-out),border-color var(--t-ui) ease,color var(--t-ui) ease}
+.row.rk.on .rkn{background:var(--navy);border:2px solid var(--navy);color:#fff}
+.row.rk.on .txt{font-weight:800;color:var(--navy)}
+.row.rk.on{background:#F6F7FC}
+.link{border:0;background:transparent;color:var(--navy);font-weight:800;font-size:15px;min-height:44px;padding:0 4px;cursor:pointer;margin-top:4px}
+/* number */
+.numrow{display:flex;align-items:center;gap:10px;padding-inline-end:18px}
+.numrow input{flex:1;font-size:22px!important;font-weight:800;font-variant-numeric:tabular-nums;direction:ltr;text-align:start}
+[dir="rtl"] .numrow input{text-align:right}
+.numrow input:disabled{background:transparent;opacity:.5}
+.numrow .unit{color:var(--ink3);font-weight:700;white-space:nowrap}
+.group .row.sub{border-top:1px solid var(--sep)}
+/* scale grid */
+.group.scale{padding:6px 0}
+.sc-key{direction:ltr;display:flex;justify-content:space-between;gap:12px;font-size:13.5px;color:var(--ink3);padding:8px 18px 4px}
+.sc-row{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:12px;align-items:center;padding:8px 18px;position:relative}
+.sc-row+.sc-row::before{content:"";position:absolute;top:0;inset-inline-start:18px;inset-inline-end:0;height:1px;background:var(--sep)}
+.sc-lbl{font-size:17px;line-height:1.35}
+.sc-btns{display:flex;gap:6px;direction:ltr}
+.sc-btns button{width:44px;height:44px;border-radius:12px;border:2px solid var(--sep);background:var(--group);font-weight:800;font-size:16px;cursor:pointer;color:var(--ink2);transition:background var(--t-ui) var(--ease-out),border-color var(--t-ui) ease,color var(--t-ui) ease}
+.sc-btns button:hover{border-color:#C3C7D9}
+.sc-btns button.on{background:var(--gold);border-color:var(--gold);color:var(--navy)}
+.sc-btns button.pop{animation:bump .34s var(--ease-out)}
 @keyframes bump{40%{transform:scale(.82)}100%{transform:scale(1)}}
 .group textarea,.group input[type=text]{display:block;width:100%;border:0;background:transparent;padding:14px 18px;font-size:17.5px;line-height:1.55;resize:vertical}
 .group textarea{min-height:120px}
@@ -207,7 +232,7 @@ h1.plain{font-size:40px;line-height:1.15;font-weight:900;margin:0 0 10px}
 
 /* ---------- finale ---------- */
 .finale{text-align:center;padding:64px 28px 120px}
-.finale .logo-draw{width:min(80%,380px)}
+.finale .logo-draw{width:min(80%,380px);margin-inline:auto}
 .finale h1{font-size:clamp(34px,4vw,52px);font-weight:900;margin:26px 0 8px;opacity:0;animation:fadeup .8s var(--ease-out) 1.5s forwards}
 .finale p{color:#D7DCF2;font-size:19px;max-width:48ch;margin:0 auto 26px;opacity:0;animation:fadeup .8s var(--ease-out) 1.65s forwards}
 .finale .btn{opacity:0;animation:fadeup .8s var(--ease-out) 1.8s forwards}
@@ -218,6 +243,7 @@ h1.plain{font-size:40px;line-height:1.15;font-weight:900;margin:0 0 10px}
 
 /* ---------- phone ---------- */
 @media (max-width:900px){
+  .sc-row{grid-template-columns:1fr}.sc-btns button{flex:1;width:auto}
   .layout{grid-template-columns:minmax(0,1fr);gap:0;padding-block:16px 130px;padding-inline:16px}
   .layout.wide{padding-block:12px 120px}
   .journey{display:none}
@@ -274,6 +300,10 @@ h1.plain{font-size:40px;line-height:1.15;font-weight:900;margin:0 0 10px}
   .pq .qt{font-weight:700;margin:0 0 2px;display:flex;gap:8px}
   .pq .qt i{font-style:normal;color:var(--gold-ink);min-width:2em}
   .pq .ph2{font-size:9pt;color:#666;margin:0 0 4px}
+  .pbox.n{width:20px;height:16px;border-radius:3px;font-size:9pt;font-weight:800;display:grid;place-items:center;margin-top:2px;color:#172A77}
+  .pscale{border-collapse:collapse;width:100%}.pscale td{padding:2px 4px;border-bottom:1px solid #E3E5EE}.pscale td.c{width:28px;text-align:center}
+  .pdot{display:inline-grid;place-items:center;width:18px;height:18px;border:1.2px solid #222;border-radius:50%;font-size:8.5pt}
+  .pdot.on{background:#172A77;color:#fff;border-color:#172A77}
   .popts{display:grid;grid-template-columns:1fr 1fr;gap:2px 18px}
   .popt{display:flex;gap:8px;align-items:flex-start}
   .pbox{width:12px;height:12px;border:1.5px solid #222;flex:none;margin-top:4px}
@@ -313,13 +343,13 @@ h1.plain{font-size:40px;line-height:1.15;font-weight:900;margin:0 0 10px}
 <script>
 (function(){
 const SV=window.SURVEY,CFG=window.SURVEY_CONFIG||{};
-const KEY="almasar-survey-draft-v2";
+const KEY="almasar-survey-draft-v3";
 const RM=window.matchMedia&&matchMedia("(prefers-reduced-motion: reduce)").matches;
 const T={
  tag:["With you on every path","معك في كل مسار"],
  t1:["Your vision","رؤيتكم"], t2:["shapes our plan","ترسم خطّتنا"],
  lede:["A short questionnaire for Al-Masar's management. Your answers set the goals, budget and way of working for the marketing plan.","استبيان قصير لإدارة المسار. إجاباتكم تحدد أهداف خطة التسويق وميزانيتها وطريقة العمل عليها."],
- f1:["<b>{n}</b> questions","<b>{n}</b> سؤالاً"], f2:["About <b>10 minutes</b>","حوالي <b>10 دقائق</b>"], f3:["Confidential","سرّية"],
+ f1:["<b>{n}</b> questions","<b>{n}</b> سؤالاً"], f2:["About <b>20 minutes</b>","حوالي <b>20 دقيقة</b>"], f3:["Confidential","سرّية"],
  you:["Before we start","قبل أن نبدأ"], youHint:["Write your name so we know who answered.","اكتب اسمك حتى نعرف صاحب الإجابات."],
  you2:["About you","بياناتك"], name:["Name","الاسم"], role:["Role","المنصب"], roleph:["e.g. Chairman, General Manager","مثال: رئيس مجلس الإدارة، المدير العام"],
  start:["Start the journey","ابدأ الرحلة"], next:["Continue","متابعة"], back:["Back","رجوع"], toReview:["Review answers","مراجعة الإجابات"],
@@ -337,7 +367,11 @@ const T={
  printBlank:["Print a blank copy","طباعة نسخة فارغة"], printBlankS:["To fill in by hand","للتعبئة باليد"], printLbl:["Print","طباعة"],
  foot:["Prepared by the Smart Idea team for Al-Masar Insurance. Confidential.","إعداد فريق الفكرة الذكية لشركة المسار للتأمين. سرّي."],
  date:["Date","التاريخ"], pfoot:["Al-Masar Insurance. Confidential.","المسار للتأمين. سرّي."], title:["Management discovery questionnaire","استبيان رؤية الإدارة"],
- of:["{a} of {b} answered","تمت الإجابة عن {a} من {b}"], secOf:["{a} of {b} answered in this section","أجبت عن {a} من {b} في هذا القسم"]
+ of:["{a} of {b} answered","تمت الإجابة عن {a} من {b}"],
+ rankHint:["Tap the options in order of importance: first tap = most important. Tap again to undo.","اضغط على الخيارات حسب أهميتها: أول ضغطة = الأهم. اضغط مرة أخرى للتراجع."],
+ rankClear:["Start again","ابدأ من جديد"], dk:["Don't know","لا أعرف"], numPh:["Write a number","اكتب رقماً"],
+ scaleHint:["Tap a number on each line.","اختر رقماً في كل سطر."], printRank:["Write 1 next to the most important, 2 next, and so on.","اكتب 1 بجانب الأهم، ثم 2، وهكذا."],
+ printScale:["Circle one number on each line: 1 = much weaker, 5 = much stronger.","ضع دائرة حول رقم واحد في كل سطر: 1 = أضعف بكثير، 5 = أقوى بكثير."], secOf:["{a} of {b} answered in this section","أجبت عن {a} من {b} في هذا القسم"]
 };
 let st={};try{st=JSON.parse(localStorage.getItem(KEY)||"{}")||{}}catch(e){st={}}
 const qp=new URLSearchParams(location.search);
@@ -352,7 +386,10 @@ const $=(s,r=document)=>r.querySelector(s);
 const esc=s=>String(s==null?"":s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
 const tr=(k,v)=>{let s=T[k][L];if(v)for(const x in v)s=s.split("{"+x+"}").join(v[x]);return s};
 function save(){try{localStorage.setItem(KEY,JSON.stringify(st))}catch(e){}}
-function answered(q,a){a=a||st.a;const v=a[q.id];if(q.type==="single")return v!=null;if(q.type==="multi")return Array.isArray(v)&&v.length>0;return !!(v&&String(v).trim())}
+function answered(q,a){a=a||st.a;const v=a[q.id];if(q.type==="single")return v!=null;if(q.type==="multi"||q.type==="rank")return Array.isArray(v)&&v.length>0;
+  if(q.type==="number")return v==="dk"||typeof v==="number";if(q.type==="scale")return !!(v&&typeof v==="object"&&Object.keys(v).length);return !!(v&&String(v).trim())}
+const toNum=x=>{const t=String(x||"").replace(/[\u0660-\u0669]/g,d=>d.charCodeAt(0)-0x660).replace(/[\u06F0-\u06F9]/g,d=>d.charCodeAt(0)-0x6F0).replace(/[^0-9.]/g,"");return t?Number(t):null};
+const fmtN=n=>typeof n==="number"?n.toLocaleString("en-US"):"";
 const nAns=()=>ALLQ.filter(q=>answered(q)).length;
 const secDone=i=>SECS[i-1].q.filter(q=>answered(q)).length;
 const stepName=i=>i===0?tr("you2"):i===LAST?tr("review"):SECS[i-1].t[L];
@@ -390,9 +427,20 @@ function journey(){
 function rowsFor(q){const v=st.a[q.id];
   return q.o.map((o,i)=>{const on=q.type==="single"?v===i:(Array.isArray(v)&&v.includes(i));
     return `<label class="row ${q.type}"><input type="${q.type==="single"?"radio":"checkbox"}" name="f_${q.id}" value="${i}" ${on?"checked":""}><span class="in"><span class="mk">${CHK}</span><span class="txt">${esc(o[L])}</span></span></label>`}).join("")}
+function cmt(q){return q.comment?`<div class="sub"><label class="sr" for="f_${q.id}_c">${esc(q.c[L])}</label><input type="text" id="f_${q.id}_c" placeholder="${esc(q.c[L])}" value="${esc(st.a[q.id+"_c"]||"")}"></div>`:""}
+function rankRows(q){const v=Array.isArray(st.a[q.id])?st.a[q.id]:[];
+  return q.o.map((o,i)=>{const p=v.indexOf(i);return `<button type="button" class="row rk ${p>=0?"on":""}" data-rk="${i}" aria-pressed="${p>=0}"><span class="in"><span class="rkn" aria-hidden="true">${p>=0?p+1:""}</span><span class="txt">${esc(o[L])}</span></span></button>`}).join("")}
 function qBlock(q){
-  if(q.o){const hint=q.type==="single"?tr("choose"):(q.max?tr("upTo",{n:q.max}):tr("chooseMany"));
-    return `<fieldset class="q" data-q="${q.id}"><legend>${esc(q.t[L])}</legend><p class="hint">${hint}</p><div class="group" role="${q.type==="single"?"radiogroup":"group"}">${rowsFor(q)}${q.comment?`<div class="sub"><label class="sr" for="f_${q.id}_c">${esc(q.c[L])}</label><input type="text" id="f_${q.id}_c" placeholder="${esc(q.c[L])}" value="${esc(st.a[q.id+"_c"]||"")}"></div>`:""}</div></fieldset>`}
+  const head=(hint)=>`<legend>${esc(q.t[L])}</legend>${q.h?`<p class="hint">${esc(q.h[L])}</p>`:""}${hint?`<p class="hint">${hint}</p>`:""}`;
+  if(q.type==="rank")return `<fieldset class="q" data-q="${q.id}">${head(tr("rankHint"))}<div class="group" role="group" id="g_${q.id}">${rankRows(q)}</div><button type="button" class="link" data-rkclear="${q.id}">${tr("rankClear")}</button></fieldset>`;
+  if(q.type==="number"){const v=st.a[q.id],dk=v==="dk";
+    return `<fieldset class="q" data-q="${q.id}">${head("")}<div class="group"><div class="numrow"><input type="text" inputmode="decimal" id="f_${q.id}" aria-label="${esc(q.t[L])}" placeholder="${esc(tr("numPh"))}" value="${dk?"":esc(fmtN(v))}" ${dk?"disabled":""}>${q.unit?`<span class="unit">${esc(q.unit[L])}</span>`:""}</div>
+      <label class="row multi sub"><input type="checkbox" id="f_${q.id}_dk" ${dk?"checked":""}><span class="in"><span class="mk">${CHK}</span><span class="txt">${tr("dk")}</span></span></label></div></fieldset>`}
+  if(q.type==="scale"){const v=st.a[q.id]||{};
+    return `<fieldset class="q" data-q="${q.id}">${head(tr("scaleHint"))}<div class="group scale"><div class="sc-key" aria-hidden="true"><span dir="auto">1 = ${esc(q.lo[L])}</span><span dir="auto">5 = ${esc(q.hi[L])}</span></div>`+
+      q.items.map((it,i)=>`<div class="sc-row"><div class="sc-lbl" id="sl_${q.id}_${i}">${esc(it[L])}</div><div class="sc-btns" role="radiogroup" aria-labelledby="sl_${q.id}_${i}">${[1,2,3,4,5].map(n=>`<button type="button" role="radio" aria-checked="${v[i]===n}" class="${v[i]===n?"on":""}" data-sc="${i}" data-n="${n}">${n}</button>`).join("")}</div></div>`).join("")+`</div></fieldset>`}
+  if(q.o){const hint=/[(（]/.test(q.t[L])?"":q.type==="single"?tr("choose"):(q.max?tr("upTo",{n:q.max}):tr("chooseMany"));
+    return `<fieldset class="q" data-q="${q.id}">${head(hint)}<div class="group" role="${q.type==="single"?"radiogroup":"group"}">${rowsFor(q)}${cmt(q)}</div></fieldset>`}
   const f=q.type==="text"?`<textarea id="f_${q.id}">${esc(st.a[q.id]||"")}</textarea>`:`<input type="text" id="f_${q.id}" value="${esc(st.a[q.id]||"")}">`;
   return `<div class="q" data-q="${q.id}"><label class="qt" for="f_${q.id}" style="display:block">${esc(q.t[L])}</label><div class="group" style="margin-top:10px">${f}</div></div>`;
 }
@@ -447,6 +495,9 @@ function render(dir){
 function ansText(q,a){const v=a[q.id];let s="";
   if(q.type==="single")s=v!=null&&q.o[v]?q.o[v][L]:"";
   else if(q.type==="multi")s=Array.isArray(v)?v.map(i=>q.o[i]&&q.o[i][L]).filter(Boolean).join(L?"، ":", "):"";
+  else if(q.type==="rank")s=Array.isArray(v)?v.map((i,k)=>(k+1)+". "+(q.o[i]?q.o[i][L]:"")).join(L?"، ":", "):"";
+  else if(q.type==="number")s=v==="dk"?tr("dk"):typeof v==="number"?fmtN(v)+(q.unit?" "+q.unit[L]:""):"";
+  else if(q.type==="scale")s=v&&typeof v==="object"?q.items.map((it,i)=>v[i]?it[L]+": "+v[i]:"").filter(Boolean).join(L?"، ":", "):"";
   else s=v||"";
   if(q.comment&&a[q.id+"_c"])s+=(s?" — ":"")+a[q.id+"_c"];return s}
 function tick(){if(navigator.vibrate&&!RM)try{navigator.vibrate(8)}catch(e){}}
@@ -462,11 +513,23 @@ function wire(){
     nm.addEventListener("keydown",e=>{if(e.key==="Enter"&&nm.value.trim())go(1)});
     $("#r_role").addEventListener("input",e=>{st.role=e.target.value;save()});}
   if(st.step>=1&&st.step<=SECS.length)SECS[st.step-1].q.forEach(q=>{
+    if(q.comment&&q.o&&q.type!=="rank")$(`#f_${q.id}_c`).addEventListener("input",e=>{st.a[q.id+"_c"]=e.target.value;save()});
     if(q.type==="single")document.querySelectorAll(`input[name="f_${q.id}"]`).forEach(r=>r.addEventListener("change",()=>{st.a[q.id]=+r.value;bump(r);changed()}));
+    else if(q.type==="rank"){const g=$(`#g_${q.id}`);
+      const redraw=()=>{g.innerHTML=rankRows(q);hook()};
+      const hook=()=>g.querySelectorAll("[data-rk]").forEach(b=>b.onclick=()=>{const i=+b.dataset.rk;let v=Array.isArray(st.a[q.id])?st.a[q.id].slice():[];
+        const p=v.indexOf(i);if(p>=0)v.splice(p,1);else v.push(i);st.a[q.id]=v;redraw();const nb=g.querySelector(`[data-rk="${i}"]`);if(nb){nb.focus();bump(nb)}changed()});
+      hook();const c=$(`[data-rkclear="${q.id}"]`);if(c)c.onclick=()=>{st.a[q.id]=[];redraw();changed()}}
+    else if(q.type==="number"){const inp=$(`#f_${q.id}`),dk=$(`#f_${q.id}_dk`);
+      inp.addEventListener("input",()=>{const n=toNum(inp.value);if(n==null)delete st.a[q.id];else st.a[q.id]=n;changed()});
+      inp.addEventListener("blur",()=>{if(typeof st.a[q.id]==="number")inp.value=fmtN(st.a[q.id])});
+      dk.addEventListener("change",()=>{if(dk.checked){st.a[q.id]="dk";inp.value="";inp.disabled=true}else{delete st.a[q.id];inp.disabled=false;inp.focus()}bump(dk);changed()})}
+    else if(q.type==="scale")document.querySelectorAll(`[data-q="${q.id}"] [data-sc]`).forEach(b=>b.onclick=()=>{const i=+b.dataset.sc,n=+b.dataset.n;const v=Object.assign({},st.a[q.id]||{});
+      if(v[i]===n)delete v[i];else v[i]=n;st.a[q.id]=v;b.parentNode.querySelectorAll("button").forEach(x=>{const on=v[i]===+x.dataset.n;x.classList.toggle("on",on);x.setAttribute("aria-checked",on)});
+      b.classList.remove("pop");void b.offsetWidth;b.classList.add("pop");tick();changed()});
     else if(q.type==="multi"){const bx=[...document.querySelectorAll(`input[name="f_${q.id}"]`)];
       const sync=()=>{if(!q.max)return;const c=bx.filter(b=>b.checked).length;bx.forEach(b=>{const lim=!b.checked&&c>=q.max;b.disabled=lim;b.closest(".row").classList.toggle("off",lim)})};
-      bx.forEach(b=>b.addEventListener("change",()=>{st.a[q.id]=bx.filter(x=>x.checked).map(x=>+x.value);sync();bump(b);changed()}));sync();
-      if(q.comment)$(`#f_${q.id}_c`).addEventListener("input",e=>{st.a[q.id+"_c"]=e.target.value;save()});}
+      bx.forEach(b=>b.addEventListener("change",()=>{st.a[q.id]=bx.filter(x=>x.checked).map(x=>+x.value);sync();bump(b);changed()}));sync();}
     else $(`#f_${q.id}`).addEventListener("input",e=>{st.a[q.id]=e.target.value;changed()});
   });
 }
@@ -484,8 +547,11 @@ function buildPrint(blank,a,meta){
   let h=`<div class="ph"><img src="assets/horiz.png" alt=""><div class="t">${tr("title")}</div></div>
    <div class="pmeta"><div><div class="pl">${tr("name")}</div><div class="pline">${blank?"":esc(meta.name)}</div></div><div><div class="pl">${tr("role")}</div><div class="pline">${blank?"":esc(meta.role)}</div></div><div><div class="pl">${tr("date")}</div><div class="pline">${d}</div></div></div>`;
   SECS.forEach(s=>{h+=`<div class="psec"><h2>${esc(s.t[L])}</h2>`;s.q.forEach(q=>{const v=a[q.id];let b="";
-    if(q.o){const hint=q.type==="single"?tr("choose"):(q.max?tr("upTo",{n:q.max}):tr("chooseMany"));
-      b=`<p class="ph2">${hint}</p><div class="popts">`+q.o.map((o,i)=>{const on=!blank&&(q.type==="single"?v===i:(Array.isArray(v)&&v.includes(i)));return `<div class="popt"><span class="pbox ${q.type==="single"?"c":""} ${on?"on":""}"></span><span>${esc(o[L])}</span></div>`}).join("")+`</div>`;
+    if(q.type==="rank"){const r=Array.isArray(v)?v:[];b=`<p class="ph2">${tr("printRank")}</p><div class="popts">`+q.o.map((o,i)=>{const p=blank?-1:r.indexOf(i);return `<div class="popt"><span class="pbox n">${p>=0?p+1:""}</span><span>${esc(o[L])}</span></div>`}).join("")+`</div>`}
+    else if(q.type==="number")b=`<div class="ptxt">${blank?"":esc(v==="dk"?tr("dk"):fmtN(v))} <span class="pl">${q.unit?esc(q.unit[L]):""}</span></div>`;
+    else if(q.type==="scale"){const r=v||{};b=`<p class="ph2">${tr("printScale")}</p><table class="pscale">`+q.items.map((it,i)=>`<tr><td>${esc(it[L])}</td>${[1,2,3,4,5].map(n=>`<td class="c"><span class="pdot ${!blank&&r[i]===n?"on":""}">${n}</span></td>`).join("")}</tr>`).join("")+`</table>`}
+    else if(q.o){const hint=/[(（]/.test(q.t[L])?"":q.type==="single"?tr("choose"):(q.max?tr("upTo",{n:q.max}):tr("chooseMany"));
+      b=`${hint?`<p class="ph2">${hint}</p>`:""}<div class="popts">`+q.o.map((o,i)=>{const on=!blank&&(q.type==="single"?v===i:(Array.isArray(v)&&v.includes(i)));return `<div class="popt"><span class="pbox ${q.type==="single"?"c":""} ${on?"on":""}"></span><span>${esc(o[L])}</span></div>`}).join("")+`</div>`;
       if(q.comment)b+=`<div class="ptxt" style="margin-top:4px">${blank?"":esc(a[q.id+"_c"]||"")}</div>`}
     else b=`<div class="ptxt ${q.type==="text"?"big":""}">${blank?"":esc(v||"")}</div>`;
     h+=`<div class="pq"><p class="qt"><i>${q.id}</i><span>${esc(q.t[L])}</span></p>${b}</div>`});h+=`</div>`});
@@ -504,7 +570,11 @@ document.addEventListener("keydown",e=>{if(e.key==="Escape"&&!$("#menu").hidden)
 
 /* send */
 function readable(){const o={};ALLQ.forEach(q=>{const v=st.a[q.id];let s="";
-  if(q.type==="single")s=v!=null&&q.o[v]?q.o[v][0]:"";else if(q.type==="multi")s=Array.isArray(v)?v.map(i=>q.o[i]&&q.o[i][0]).filter(Boolean).join("; "):"";else s=v||"";
+  if(q.type==="single")s=v!=null&&q.o[v]?q.o[v][0]:"";else if(q.type==="multi")s=Array.isArray(v)?v.map(i=>q.o[i]&&q.o[i][0]).filter(Boolean).join("; "):"";
+  else if(q.type==="rank")s=Array.isArray(v)?v.map((i,k)=>(k+1)+". "+(q.o[i]?q.o[i][0]:"")).join("; "):"";
+  else if(q.type==="number")s=v==="dk"?"Don't know":typeof v==="number"?String(v):"";
+  else if(q.type==="scale")s=v&&typeof v==="object"?q.items.map((it,i)=>v[i]?it[0]+": "+v[i]:"").filter(Boolean).join("; "):"";
+  else s=v||"";
   if(q.comment&&st.a[q.id+"_c"])s+=(s?" | ":"")+"Details: "+st.a[q.id+"_c"];o[q.id]=s});return o}
 async function post(ep,body){
   try{const r=await fetch(ep,{method:"POST",body,headers:{"Content-Type":"text/plain;charset=utf-8"}});let j=null;try{j=await r.json()}catch(e){}
